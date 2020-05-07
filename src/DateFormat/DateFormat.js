@@ -1,6 +1,7 @@
 import React from "react";
 
 const FormattedDate = ({ timeStamp }) => {
+  console.log("date");
   let monthEng = {
     0: "Jan",
     1: "Feb",
@@ -29,4 +30,4 @@ const FormattedDate = ({ timeStamp }) => {
   );
 };
 
-export default FormattedDate;
+export default React.memo(FormattedDate);
