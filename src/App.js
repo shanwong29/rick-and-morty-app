@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import getData from "./service/getData";
-import InfoCard from "./InfoCard/InforCard";
-import PageControl from "./PageControl/PageControl";
+import InfoCard from "./components/InfoCard/InforCard";
+import PageControl from "./components/PageControl/PageControl";
 
 function App() {
   const [characterData, setCharacterData] = useState([]);
