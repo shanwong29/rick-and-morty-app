@@ -1,14 +1,27 @@
 import React, { Fragment } from "react";
 import DateFormat from "../DateFormat/DateFormat";
 
-const InforCard = ({ characterData }) => {
-  const cardDisplay = [...characterData].map((el, i) => {
-    const { name, status, species, image, created } = el;
+const InforCard = ({ characterData, showSecondPart, page }) => {
+  const numOfCardOnEachPage = 10;
+
+  let modifiedData;
+  if (showSecondPart) {
+    modifiedData = characterData.slice(numOfCardOnEachPage);
+  } else {
+    modifiedData = characterData.slice(0, numOfCardOnEachPage);
+  }
+
+  console.log("info card");
+
+  const cardDisplay = modifiedData.map((el, i) => {
+    const { name, status, species, image, created, id } = el;
 
     return (
       <Fragment key={i}>
         <img src={image} alt={name} />
-        <p>{name}</p>
+        <p>
+          {name} id: {id}
+        </p>
         <p>
           created on <DateFormat timeStamp={created} />
         </p>
@@ -27,4 +40,4 @@ const InforCard = ({ characterData }) => {
   return <div>{cardDisplay}</div>;
 };
 
-export default InforCard;
+export default React.memo(InforCard);
