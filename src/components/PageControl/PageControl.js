@@ -1,34 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import Context from "../../store/context";
 
-const PageControl = ({ dataInfo, setPage, setShowSecondPart, page }) => {
-  //   console.log("page control");
-  const { count } = dataInfo;
+const PageControl = () => {
+  console.log("page control");
+  const { state, dispatch } = useContext(Context);
 
-  const numberOfBtns = Math.ceil(count / 10);
+  const numberOfBtns = Math.ceil(state.dataInfo.count / 10);
 
   let btnDisplay = [];
 
   for (let i = 1; i <= numberOfBtns; i++) {
-    let targetPage = Math.ceil(i / 2);
-
-    let callbackFn = () => {
-      setPage(targetPage);
-      setShowSecondPart(false);
-    };
-    if (i % 2 === 0) {
-      callbackFn = () => {
-        setShowSecondPart(true);
-      };
-
-      if (targetPage !== page) {
-        callbackFn = () => {
-          setPage(targetPage);
-          setShowSecondPart(true);
-        };
-      }
-    }
     btnDisplay.push(
-      <button key={i} onClick={callbackFn}>
+      <button
+        key={i}
+        onClick={() => {
+          dispatch({ type: `CHANGE_PAGE_NUM`, btnNum: i });
+        }}
+      >
         {i}
       </button>
     );

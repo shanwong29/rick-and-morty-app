@@ -1,17 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import DateFormat from "../DateFormat/DateFormat";
+import Context from "../../store/context";
 
-const InforCard = ({ characterData, showSecondPart, page }) => {
+const InforCard = () => {
+  console.log("info card");
+  const { state } = useContext(Context);
+
   const numOfCardOnEachPage = 10;
 
   let modifiedData;
-  if (showSecondPart) {
-    modifiedData = characterData.slice(numOfCardOnEachPage);
+  if (state.showSecondPart) {
+    modifiedData = state.characterData.slice(numOfCardOnEachPage);
   } else {
-    modifiedData = characterData.slice(0, numOfCardOnEachPage);
+    modifiedData = state.characterData.slice(0, numOfCardOnEachPage);
   }
-
-  console.log("info card");
 
   const cardDisplay = modifiedData.map((el, i) => {
     const { name, status, species, image, created, id } = el;

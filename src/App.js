@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import getData from "./service/getData";
 import InfoCard from "./components/InfoCard/InforCard";
 import PageControl from "./components/PageControl/PageControl";
 
-function App() {
-  const [characterData, setCharacterData] = useState([]);
-  const [dataInfo, setDataInfo] = useState({});
-  const [error, setError] = useState("");
-  const [page, setPage] = useState(1);
-  const [showSecondPart, setShowSecondPart] = useState(false);
+import useGlobalState from "./store/useGlobalState";
+import Context from "./store/context";
 
+function App() {
   console.log("APP");
+  const [state, dispatch] = useGlobalState();
 
   const fetchCharacterData = async (query = "") => {
     try {
@@ -21,15 +19,16 @@ function App() {
 
       if (response.error) {
         console.log("Err returned from API:", response.error);
-        return setError(response.error);
+        return dispatch({ type: `HANDLE_ERROR`, payload: response.error });
       }
 
-      setCharacterData(response.results);
-      // console.log("He");
-      setDataInfo(response.info);
+      dispatch({
+        type: `RECIEVED_DATA`,
+        payload: { results: response.results, info: response.info },
+      });
     } catch (err) {
       console.log("Err from fetching", err);
-      return setError(err);
+      // return setError(err);
     }
   };
 
@@ -39,23 +38,16 @@ function App() {
 
   useEffect(() => {
     // console.log("PAGE USEEFFECT");
-    fetchCharacterData(`?page=${page}`);
-  }, [page]);
+    fetchCharacterData(`?page=${state.page}`);
+  }, [state.page]);
 
   return (
-    <div className="App">
-      <InfoCard
-        characterData={characterData}
-        showSecondPart={showSecondPart}
-        page={page}
-      />
-      <PageControl
-        dataInfo={dataInfo}
-        setPage={setPage}
-        setShowSecondPart={setShowSecondPart}
-        page={page}
-      />
-    </div>
+    <Context.Provider value={{ state, dispatch }}>
+      <div className="App">
+        <InfoCard />
+        <PageControl />
+      </div>
+    </Context.Provider>
   );
 }
 
