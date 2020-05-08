@@ -4,7 +4,7 @@ import Context from "../../store/context";
 
 const DetailCard = ({ modifiedData }) => {
   console.log("detail card");
-  const { state } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   const activeCharInfo = modifiedData[state.activeCharPosition];
 
@@ -44,6 +44,16 @@ const DetailCard = ({ modifiedData }) => {
       <p>Origin: {origin.name}</p>
       <p>Appeared Episode:</p>
       {episodeInfo}
+      <button
+        onClick={() => {
+          dispatch({
+            type: `UPDATE_ACTIVE_CHAR_POSITION`,
+            payload: null,
+          });
+        }}
+      >
+        &#10005;
+      </button>
     </div>
   );
 };
