@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import getData from "./service/getData";
+import { getEpiNumReqStr } from "./service/getEpiNumReqStr";
 import InfoCard from "./components/InfoCard/InforCard";
 import PageControl from "./components/PageControl/PageControl";
-
 import useGlobalState from "./store/useGlobalState";
 import Context from "./store/context";
 
@@ -32,7 +32,6 @@ function App() {
         if (!response.length) {
           dataInArr = [{ ...response }];
         }
-        console.log(dataInArr);
         dispatch({
           type: `RECIEVED_EPISODE_DATA`,
           payload: dataInArr,
@@ -40,7 +39,6 @@ function App() {
       }
     } catch (err) {
       console.log("Err from fetching", err);
-      // return setError(err);
     }
   };
 
@@ -49,17 +47,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // console.log("PAGE USEEFFECT");
     fetchData(`?page=${state.page}`);
   }, [state.page]);
 
   useEffect(() => {
-    console.log("episodeREQ", state.episodeReq);
-    if (!state.episodeReq) {
+    const numOfCardOnEachPage = 10;
+
+    let charPosition = state.activeCharPosition;
+
+    if (!charPosition && charPosition !== 0) {
       return;
     }
-    fetchData(`${state.episodeReq}`, `episode`);
-  }, [state.episodeReq]);
+
+    if (state.page % 2 === 0) {
+      charPosition = Number(state.activeCharPosition) + numOfCardOnEachPage;
+    }
+
+    const activeCharEpiInfo = state.characterData[charPosition].episode;
+    const episodeReq = getEpiNumReqStr(activeCharEpiInfo);
+
+    fetchData(`${episodeReq}`, `episode`);
+  }, [state.activeCharPosition]);
 
   return (
     <Context.Provider value={{ state, dispatch }}>

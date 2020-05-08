@@ -1,33 +1,12 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { useContext } from "react";
 import DateFormat from "../DateFormat/DateFormat";
+import DetailCard from "../DetailCard/DetailCard";
 import Context from "../../store/context";
 
 const InfoCard = () => {
   console.log("info card");
   const { state, dispatch } = useContext(Context);
-  const [isActiveChar, setActiveChar] = useState(null);
-
   console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
-
-  const getCharDetail = (episodeUrlArr, charIndex) => {
-    const episodeNumArr = episodeUrlArr.map((url, i) => {
-      let episodeNum = 1;
-      for (let i = url.length - 1; i >= 0; i--) {
-        if (url[i] === "/") {
-          episodeNum = url.slice(i + 1);
-          break;
-        }
-      }
-      return episodeNum;
-    });
-
-    const episodeReq = episodeNumArr.join();
-    setActiveChar(charIndex);
-    dispatch({
-      type: `UPDATE_ACTIVE_CHAR_EP_REQ`,
-      payload: episodeReq,
-    });
-  };
 
   const numOfCardOnEachPage = 10;
 
@@ -38,33 +17,19 @@ const InfoCard = () => {
     modifiedData = state.characterData.slice(0, numOfCardOnEachPage);
   }
 
-  const episodeInfo = state.episodeData.map((el, i) => {
-    return (
-      <Fragment key={i}>
-        <p>
-          <span>
-            {el.episode} {el.name}
-          </span>
-        </p>
-      </Fragment>
-    );
-  });
-
   const cardDisplay = modifiedData.map((el, i) => {
-    const {
-      name,
-      status,
-      species,
-      image,
-      created,
-      id,
-      gender,
-      origin,
-      episode,
-    } = el;
+    const { name, status, species, image, created, id } = el;
 
     return (
-      <Fragment key={i}>
+      <button
+        onClick={() => {
+          dispatch({
+            type: `UPDATE_ACTIVE_CHAR_POSITION`,
+            payload: i,
+          });
+        }}
+        key={i}
+      >
         <img src={image} alt={name} />
         <p>
           {name} id: {id}
@@ -72,41 +37,18 @@ const InfoCard = () => {
         <p>
           created on <DateFormat timeStamp={created} />
         </p>
-        <p>
-          <span>species</span>
-          <span>{species}</span>
-        </p>
-        <p>
-          <span>status</span>
-          <span>{status}</span>
-        </p>
-        <button
-          onClick={() => {
-            getCharDetail(episode, i);
-          }}
-        >
-          See more ...
-        </button>
-        {isActiveChar === i && (
-          <>
-            <p>
-              <span>gender</span>
-              <span>{gender}</span>
-            </p>
-            <p>
-              <span>origin</span>
-              <span>{origin.name}</span>
-            </p>
-
-            <p>Appeared Episode</p>
-            {episodeInfo}
-          </>
-        )}
-      </Fragment>
+        <p>Species: {species}</p>
+        <p>Status: {status}</p>
+      </button>
     );
   });
 
-  return <div>{cardDisplay}</div>;
+  return (
+    <div>
+      {cardDisplay}{" "}
+      {state.activeCharPosition && <DetailCard modifiedData={modifiedData} />}
+    </div>
+  );
 };
 
 export default React.memo(InfoCard);

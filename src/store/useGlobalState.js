@@ -6,12 +6,11 @@ const initialState = {
   error: "",
   page: 1,
   showSecondPart: false,
-  episodeReq: "",
+  activeCharPosition: null,
   episodeData: [],
 };
 
 const reducer = (state, action) => {
-  console.log("ppp", state.showSecondPart);
   switch (action.type) {
     case "RECIEVED_DATA":
       return {
@@ -39,16 +38,16 @@ const reducer = (state, action) => {
             ...state,
             page: apiPage,
             showSecondPart: true,
-            episodeData: [],
-            episodeReq: "",
+            // episodeData: [],
+            activeCharPosition: null,
           };
         } else {
           return {
             ...state,
             page: apiPage,
             showSecondPart: false,
-            episodeData: [],
-            episodeReq: "",
+            // episodeData: [],
+            activeCharPosition: null,
           };
         }
       }
@@ -56,17 +55,17 @@ const reducer = (state, action) => {
         return {
           ...state,
           showSecondPart: true,
-          episodeReq: "",
-          episodeData: [],
+          // episodeData: [],
+          activeCharPosition: null,
         };
       } else {
         return { ...state, showSecondPart: false };
       }
 
-    case `UPDATE_ACTIVE_CHAR_EP_REQ`:
+    case `UPDATE_ACTIVE_CHAR_POSITION`:
       return {
         ...state,
-        episodeReq: action.payload,
+        activeCharPosition: action.payload,
       };
 
     case `RECIEVED_EPISODE_DATA`:
