@@ -4,6 +4,7 @@ import getData from "./service/getData";
 import { getEpiNumReqStr } from "./service/getEpiNumReqStr";
 import InfoCard from "./components/InfoCard/InforCard";
 import PageControl from "./components/PageControl/PageControl";
+import QueryInput from "./components/QueryInput/QueryInput";
 import useGlobalState from "./store/useGlobalState";
 import Context from "./store/context";
 
@@ -16,6 +17,8 @@ function App() {
       const response = await getData(
         `https://rickandmortyapi.com/api/${collection}/${query}`
       );
+
+      console.log(response);
 
       if (response.error) {
         console.log("Err returned from API:", response.error);
@@ -47,8 +50,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchData(`?page=${state.page}`);
-  }, [state.page]);
+    console.log(
+      `?page=${state.page}&species=${state.speciesQuery}&status=${state.statusQuery}`
+    );
+    fetchData(
+      `?page=${state.page}&species=${state.speciesQuery}&status=${state.statusQuery}`
+    );
+  }, [state.page, state.speciesQuery, state.statusQuery]);
 
   useEffect(() => {
     const numOfCardOnEachPage = 10;
@@ -72,6 +80,7 @@ function App() {
   return (
     <Context.Provider value={{ state, dispatch }}>
       <div className="App">
+        <QueryInput />
         <InfoCard />
         <PageControl />
       </div>

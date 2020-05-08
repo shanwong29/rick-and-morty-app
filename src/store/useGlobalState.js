@@ -8,6 +8,8 @@ const initialState = {
   showSecondPart: false,
   activeCharPosition: null,
   episodeData: [],
+  speciesQuery: "",
+  statusQuery: "",
 };
 
 const reducer = (state, action) => {
@@ -72,6 +74,15 @@ const reducer = (state, action) => {
       return {
         ...state,
         episodeData: action.payload,
+      };
+
+    case `UPDATE_QUERY`:
+      console.log(action.payload.species, action.payload.status);
+      return {
+        ...state,
+        speciesQuery: action.payload.species,
+        statusQuery: action.payload.status,
+        page: 1,
       };
 
     default:
