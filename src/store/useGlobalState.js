@@ -6,6 +6,8 @@ const initialState = {
   error: "",
   page: 1,
   showSecondPart: false,
+  episodeReq: "",
+  episodeData: [],
 };
 
 const reducer = (state, action) => {
@@ -24,6 +26,7 @@ const reducer = (state, action) => {
         ...state,
         error: action.payload,
         characterData: [],
+        episodeData: [],
         dataInfo: {},
       };
 
@@ -32,16 +35,45 @@ const reducer = (state, action) => {
 
       if (apiPage !== state.page) {
         if (action.btnNum % 2 === 0) {
-          return { ...state, page: apiPage, showSecondPart: true };
+          return {
+            ...state,
+            page: apiPage,
+            showSecondPart: true,
+            episodeData: [],
+            episodeReq: "",
+          };
         } else {
-          return { ...state, page: apiPage, showSecondPart: false };
+          return {
+            ...state,
+            page: apiPage,
+            showSecondPart: false,
+            episodeData: [],
+            episodeReq: "",
+          };
         }
       }
       if (action.btnNum % 2 === 0) {
-        return { ...state, showSecondPart: true };
+        return {
+          ...state,
+          showSecondPart: true,
+          episodeReq: "",
+          episodeData: [],
+        };
       } else {
         return { ...state, showSecondPart: false };
       }
+
+    case `UPDATE_ACTIVE_CHAR_EP_REQ`:
+      return {
+        ...state,
+        episodeReq: action.payload,
+      };
+
+    case `RECIEVED_EPISODE_DATA`:
+      return {
+        ...state,
+        episodeData: action.payload,
+      };
 
     default:
       return state;

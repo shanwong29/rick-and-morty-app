@@ -11,10 +11,10 @@ function App() {
   console.log("APP");
   const [state, dispatch] = useGlobalState();
 
-  const fetchCharacterData = async (query = "") => {
+  const fetchData = async (query = "", collection = "character") => {
     try {
       const response = await getData(
-        `https://rickandmortyapi.com/api/character/${query}`
+        `https://rickandmortyapi.com/api/${collection}/${query}`
       );
 
       if (response.error) {
@@ -22,10 +22,22 @@ function App() {
         return dispatch({ type: `HANDLE_ERROR`, payload: response.error });
       }
 
-      dispatch({
-        type: `RECIEVED_DATA`,
-        payload: { results: response.results, info: response.info },
-      });
+      if (collection === "character") {
+        dispatch({
+          type: `RECIEVED_DATA`,
+          payload: { results: response.results, info: response.info },
+        });
+      } else {
+        let dataInArr = response;
+        if (!response.length) {
+          dataInArr = [{ ...response }];
+        }
+        console.log(dataInArr);
+        dispatch({
+          type: `RECIEVED_EPISODE_DATA`,
+          payload: dataInArr,
+        });
+      }
     } catch (err) {
       console.log("Err from fetching", err);
       // return setError(err);
@@ -33,13 +45,21 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCharacterData();
+    fetchData();
   }, []);
 
   useEffect(() => {
     // console.log("PAGE USEEFFECT");
-    fetchCharacterData(`?page=${state.page}`);
+    fetchData(`?page=${state.page}`);
   }, [state.page]);
+
+  useEffect(() => {
+    console.log("episodeREQ", state.episodeReq);
+    if (!state.episodeReq) {
+      return;
+    }
+    fetchData(`${state.episodeReq}`, `episode`);
+  }, [state.episodeReq]);
 
   return (
     <Context.Provider value={{ state, dispatch }}>
