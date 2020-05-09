@@ -33,26 +33,25 @@ const DetailCard = () => {
   return (
     <>
       <Styled.Div>
-        <div>
+        <Styled.BasicInfoWrapper>
           <Styled.Img src={image} alt={name} />
+          <div>
+            <p>
+              {name} id: {id}
+            </p>
+            <p>
+              created on <DateFormat timeStamp={created} />
+            </p>
+            <p>Species: {species}</p>
+            <p>Status: {status}</p>
+            <p>Gender: {gender}</p>
+            <p>Origin: {origin.name}</p>
+          </div>
+        </Styled.BasicInfoWrapper>
 
-          <p>Appeared Episode:</p>
-          {episodeInfo}
-        </div>
-        <div>
-          <p>
-            {name} id: {id}
-          </p>
-          <p>
-            created on <DateFormat timeStamp={created} />
-          </p>
-          <p>Species: {species}</p>
-          <p>Status: {status}</p>
-          <p>Gender: {gender}</p>
-          <p>Origin: {origin.name}</p>
-        </div>
+        <p>Appeared Episode:</p>
+        {episodeInfo}
       </Styled.Div>
-
       <Styled.Button
         onClick={() => {
           dispatch({

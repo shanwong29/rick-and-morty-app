@@ -1,31 +1,39 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background-color: rgb(192, 207, 195);
-  color: rgb(75, 85, 79);
+  color: white;
+  background-color: rgb(238, 108, 77);
+  border-radius: 50%;
+  &:hover {
+    color: white;
+    background-color: rgb(178, 99, 58);
+  }
   font-size: 1.5rem;
   width: 3rem;
   height: 3rem;
   position: absolute;
-  left: 90%;
-  top: 10%;
+  left: 80%;
+  top: 15%;
   transform: translate(-50%, -50%);
 `;
 
 export const Div = styled.div`
-  position: absolute;
-  background: white;
+  width: 60%;
+  height: 70%;
   padding: 0;
-  display: flex;
-  justify-content: space-between;
+  background: white;
+  text-align: left;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
   overflow: auto;
 `;
 
+export const BasicInfoWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 export const Img = styled.img`
-  width: 30vw;
+  width: 50%;
 `;
