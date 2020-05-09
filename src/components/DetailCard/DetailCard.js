@@ -7,6 +7,12 @@ const DetailCard = () => {
   console.log("detail card");
   const { state, dispatch } = useContext(Context);
 
+  const isPopUpOn = state.activeCharPosition || state.activeCharPosition === 0;
+
+  if (!isPopUpOn) {
+    return <></>;
+  }
+
   const activeCharInfo = state.characterData[state.activeCharPosition];
 
   const episodeInfo = state.episodeData.map((el, i) => {
