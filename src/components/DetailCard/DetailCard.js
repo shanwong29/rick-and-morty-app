@@ -38,9 +38,9 @@ const DetailCard = () => {
 
   return (
     <>
-      <Styled.Div>
+      <Styled.DetailCard>
         <Styled.BasicInfoWrapper>
-          <Styled.Img src={image} alt={name} />
+          <Styled.CharImg src={image} alt={name} />
           <div>
             <p>
               {name} id: {id}
@@ -57,8 +57,8 @@ const DetailCard = () => {
 
         <p>Appeared Episode:</p>
         {episodeInfo}
-      </Styled.Div>
-      <Styled.Button
+      </Styled.DetailCard>
+      <Styled.ClosePopUpBtn
         onClick={() => {
           dispatch({
             type: `UPDATE_ACTIVE_CHAR_POSITION`,
@@ -67,7 +67,7 @@ const DetailCard = () => {
         }}
       >
         &#10005;
-      </Styled.Button>
+      </Styled.ClosePopUpBtn>
     </>
   );
 };

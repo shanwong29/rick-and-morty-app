@@ -8,10 +8,10 @@ const PageControl = () => {
 
   const numberOfBtns = Math.ceil(state.dataInfo.count / 10);
 
-  let activeSitePage = state.page * 2;
+  let activeSitePage = state.currentApiPage * 2;
 
   if (!state.showSecondPart) {
-    activeSitePage = state.page * 2 - 1;
+    activeSitePage = state.currentApiPage * 2 - 1;
   }
 
   let btnDisplay = [];

@@ -4,7 +4,7 @@ const initialState = {
   characterData: [],
   dataInfo: {},
   error: "",
-  page: 1,
+  currentApiPage: 1,
   showSecondPart: false,
   activeCharPosition: null,
   episodeData: [],
@@ -32,13 +32,13 @@ const reducer = (state, action) => {
       };
 
     case `CHANGE_PAGE_NUM`:
-      let apiPage = Math.ceil(action.btnNum / 2);
+      let targetApiPage = Math.ceil(action.btnNum / 2);
 
-      if (apiPage !== state.page) {
+      if (targetApiPage !== state.currentApiPage) {
         if (action.btnNum % 2 === 0) {
           return {
             ...state,
-            page: apiPage,
+            currentApiPage: targetApiPage,
             showSecondPart: true,
             // episodeData: [],
             activeCharPosition: null,
@@ -46,7 +46,7 @@ const reducer = (state, action) => {
         } else {
           return {
             ...state,
-            page: apiPage,
+            currentApiPage: targetApiPage,
             showSecondPart: false,
             // episodeData: [],
             activeCharPosition: null,
@@ -82,7 +82,7 @@ const reducer = (state, action) => {
         ...state,
         speciesQuery: action.payload.species,
         statusQuery: action.payload.status,
-        page: 1,
+        currentApiPage: 1,
         showSecondPart: false,
         activeCharPosition: null,
       };

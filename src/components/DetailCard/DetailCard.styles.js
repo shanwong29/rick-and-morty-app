@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const ClosePopUpBtn = styled.button`
   color: white;
   background-color: ${(props) => props.theme.pastelOrange};
   border-radius: 50%;
@@ -17,7 +17,7 @@ export const Button = styled.button`
   transform: translate(-50%, -50%);
 `;
 
-export const Div = styled.div`
+export const DetailCard = styled.div`
   width: 60%;
   height: 70%;
   background: white;
@@ -33,6 +33,6 @@ export const BasicInfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-export const Img = styled.img`
+export const CharImg = styled.img`
   width: 50%;
 `;

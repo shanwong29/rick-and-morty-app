@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import useGlobalState from "./useGlobalState";
 import Context from "./context";
+import useGlobalState from "./useGlobalState";
 import getData from "../service/getData";
+import { getEpiNumReqStr } from "../service/getEpiNumReqStr";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../styleStore/theme";
 import GlobalStyles from "../styleStore/globalStyles";
-
-import { getEpiNumReqStr } from "../service/getEpiNumReqStr";
 
 const GlobalStateProvider = ({ children }) => {
   const [state, dispatch] = useGlobalState();
@@ -50,12 +49,12 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(
-      `?page=${state.page}&species=${state.speciesQuery}&status=${state.statusQuery}`
+      `?page=${state.currentApiPage}&species=${state.speciesQuery}&status=${state.statusQuery}`
     );
     fetchData(
-      `?page=${state.page}&species=${state.speciesQuery}&status=${state.statusQuery}`
+      `?page=${state.currentApiPage}&species=${state.speciesQuery}&status=${state.statusQuery}`
     );
-  }, [state.page, state.speciesQuery, state.statusQuery]);
+  }, [state.currentApiPage, state.speciesQuery, state.statusQuery]);
 
   useEffect(() => {
     let charPosition = state.activeCharPosition;

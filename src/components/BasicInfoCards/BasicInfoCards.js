@@ -25,7 +25,7 @@ const BasicInfoCards = () => {
     }
 
     return (
-      <Styled.Button
+      <Styled.BasicInfoCard
         onClick={() => {
           dispatch({
             type: `UPDATE_ACTIVE_CHAR_POSITION`,
@@ -34,7 +34,7 @@ const BasicInfoCards = () => {
         }}
         key={i}
       >
-        <Styled.Img src={image} alt={name} />
+        <Styled.CharImg src={image} alt={name} />
         <p>
           {name} id: {id}
         </p>
@@ -43,11 +43,11 @@ const BasicInfoCards = () => {
         </p>
         <p>Species: {species}</p>
         <p>Status: {status}</p>
-      </Styled.Button>
+      </Styled.BasicInfoCard>
     );
   });
 
-  return <Styled.Div>{cardDisplay}</Styled.Div>;
+  return <Styled.InfoCardsWrapper>{cardDisplay}</Styled.InfoCardsWrapper>;
 };
 
 export default React.memo(BasicInfoCards);

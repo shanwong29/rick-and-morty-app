@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
+export const InfoCardsWrapper = styled.div`
   width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 `;
 
-export const Button = styled.button`
+export const BasicInfoCard = styled.button`
   color: ${(props) => props.theme.deepGreen};
   background: ${(props) => props.theme.lightGreen};
   width: 20%;
@@ -20,6 +20,6 @@ export const Button = styled.button`
   }
 `;
 
-export const Img = styled.img`
+export const CharImg = styled.img`
   width: 100%;
 `;
