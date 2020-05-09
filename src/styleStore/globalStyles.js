@@ -19,6 +19,7 @@ export default createGlobalStyle`
     button {
         border: none;
         outline:none;
+        background:none;
     }
 
     input{

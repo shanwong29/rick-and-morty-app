@@ -4,6 +4,8 @@ export const theme = {
   lightGreen: "#C0CFC3",
   deepGreen: "#4B554F",
   blue: "#457b9d",
+  milkTea: "#8e7054",
+  pink: "#b75d69",
 
   fontSizes: {
     sm: "10px",
