@@ -33,6 +33,8 @@ const InfoCard = () => {
   const { state, dispatch } = useContext(Context);
   console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
 
+  const isPopUpOn = state.activeCharPosition || state.activeCharPosition === 0;
+
   const numOfCardOnEachPage = 10;
 
   let modifiedData;
@@ -70,8 +72,7 @@ const InfoCard = () => {
 
   return (
     <DIV>
-      {cardDisplay}{" "}
-      {state.activeCharPosition && <DetailCard modifiedData={modifiedData} />}
+      {cardDisplay} {isPopUpOn && <DetailCard modifiedData={modifiedData} />}
     </DIV>
   );
 };
