@@ -83,6 +83,8 @@ const reducer = (state, action) => {
         speciesQuery: action.payload.species,
         statusQuery: action.payload.status,
         page: 1,
+        showSecondPart: false,
+        activeCharPosition: null,
       };
 
     default:

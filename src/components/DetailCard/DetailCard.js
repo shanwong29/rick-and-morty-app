@@ -3,11 +3,11 @@ import DateFormat from "../DateFormat/DateFormat";
 import Context from "../../store/context";
 import * as Styled from "./DetailCard.styles";
 
-const DetailCard = ({ modifiedData }) => {
+const DetailCard = () => {
   console.log("detail card");
   const { state, dispatch } = useContext(Context);
 
-  const activeCharInfo = modifiedData[state.activeCharPosition];
+  const activeCharInfo = state.characterData[state.activeCharPosition];
 
   const episodeInfo = state.episodeData.map((el, i) => {
     return (
@@ -52,6 +52,7 @@ const DetailCard = ({ modifiedData }) => {
           <p>Origin: {origin.name}</p>
         </div>
       </Styled.Div>
+
       <Styled.Button
         onClick={() => {
           dispatch({

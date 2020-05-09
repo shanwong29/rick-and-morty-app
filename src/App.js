@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import "./App.css";
 import getData from "./service/getData";
 import { getEpiNumReqStr } from "./service/getEpiNumReqStr";
-import InfoCard from "./components/InfoCard/InforCard";
+import BasicInfoCards from "./components/BasicInfoCards/BasicInfoCards";
+import DetailCard from "./components/DetailCard/DetailCard";
 import PageControl from "./components/PageControl/PageControl";
 import QueryInput from "./components/QueryInput/QueryInput";
 import useGlobalState from "./store/useGlobalState";
@@ -59,29 +60,25 @@ function App() {
   }, [state.page, state.speciesQuery, state.statusQuery]);
 
   useEffect(() => {
-    const numOfCardOnEachPage = 10;
-
     let charPosition = state.activeCharPosition;
 
     if (!charPosition && charPosition !== 0) {
       return;
     }
-
-    if (state.page % 2 === 0) {
-      charPosition = Number(state.activeCharPosition) + numOfCardOnEachPage;
-    }
-
     const activeCharEpiInfo = state.characterData[charPosition].episode;
     const episodeReq = getEpiNumReqStr(activeCharEpiInfo);
 
     fetchData(`${episodeReq}`, `episode`);
   }, [state.activeCharPosition]);
 
+  const isPopUpOn = state.activeCharPosition || state.activeCharPosition === 0;
+
   return (
     <Context.Provider value={{ state, dispatch }}>
       <div className="App">
         <QueryInput />
-        <InfoCard />
+        <BasicInfoCards />
+        {isPopUpOn && <DetailCard />}
         <PageControl />
       </div>
     </Context.Provider>

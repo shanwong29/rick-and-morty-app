@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
 import DateFormat from "../DateFormat/DateFormat";
-import DetailCard from "../DetailCard/DetailCard";
 import Context from "../../store/context";
-import * as Styled from "./InfoCard.styles";
+import * as Styled from "./BasicInfoCards.styles";
 
-const InfoCard = () => {
+const BasicInfoCards = () => {
   console.log("info card");
   const { state, dispatch } = useContext(Context);
   console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
-
-  const isPopUpOn = state.activeCharPosition || state.activeCharPosition === 0;
 
   const numOfCardOnEachPage = 10;
 
@@ -22,13 +19,17 @@ const InfoCard = () => {
 
   const cardDisplay = modifiedData.map((el, i) => {
     const { name, status, species, image, created, id } = el;
+    let charPosition = i;
+    if (state.showSecondPart) {
+      charPosition = i + numOfCardOnEachPage;
+    }
 
     return (
       <Styled.Button
         onClick={() => {
           dispatch({
             type: `UPDATE_ACTIVE_CHAR_POSITION`,
-            payload: i,
+            payload: charPosition,
           });
         }}
         key={i}
@@ -46,11 +47,7 @@ const InfoCard = () => {
     );
   });
 
-  return (
-    <Styled.Div>
-      {cardDisplay} {isPopUpOn && <DetailCard modifiedData={modifiedData} />}
-    </Styled.Div>
-  );
+  return <Styled.Div>{cardDisplay}</Styled.Div>;
 };
 
-export default React.memo(InfoCard);
+export default React.memo(BasicInfoCards);

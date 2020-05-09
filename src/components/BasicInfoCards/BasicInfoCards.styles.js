@@ -16,7 +16,6 @@ export const Div = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  position: relative; /*for .mosaic__btn-wrapper*/
 `;
 
 export const Img = styled.img`
