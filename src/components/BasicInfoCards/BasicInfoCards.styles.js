@@ -8,16 +8,15 @@ export const Div = styled.div`
 `;
 
 export const Button = styled.button`
-  color: rgb(75, 85, 79);
-  background: rgb(192, 207, 195);
-  padding: 0;
+  color: ${(props) => props.theme.deepGreen};
+  background: ${(props) => props.theme.lightGreen};
   width: 20%;
   display: flex;
   align-items: center;
   flex-direction: column;
   &:hover {
-    background: rgb(75, 85, 79);
-    color: rgb(192, 207, 195);
+    background: ${(props) => props.theme.deepGreen};
+    color: ${(props) => props.theme.lightGreen};
   }
 `;
 

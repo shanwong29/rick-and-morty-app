@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./App.css";
+// import "./App.css";
 import getData from "./service/getData";
 import { getEpiNumReqStr } from "./service/getEpiNumReqStr";
 import BasicInfoCards from "./components/BasicInfoCards/BasicInfoCards";
@@ -8,6 +8,10 @@ import PageControl from "./components/PageControl/PageControl";
 import QueryInput from "./components/QueryInput/QueryInput";
 import useGlobalState from "./store/useGlobalState";
 import Context from "./store/context";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styleStore/theme";
+import GlobalStyles from "./styleStore/globalStyles";
+import * as Styled from "./App.styles";
 
 function App() {
   console.log("APP");
@@ -75,12 +79,15 @@ function App() {
 
   return (
     <Context.Provider value={{ state, dispatch }}>
-      <div className="App">
-        <QueryInput />
-        <BasicInfoCards />
-        {isPopUpOn && <DetailCard />}
-        <PageControl />
-      </div>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Styled.AppWrapper>
+          <QueryInput />
+          <BasicInfoCards />
+          {isPopUpOn && <DetailCard />}
+          <PageControl />
+        </Styled.AppWrapper>
+      </ThemeProvider>
     </Context.Provider>
   );
 }

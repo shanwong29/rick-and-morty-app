@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   color: white;
-  background-color: rgb(238, 108, 77);
+  background-color: ${(props) => props.theme.pastelOrange};
   border-radius: 50%;
   &:hover {
     color: white;
-    background-color: rgb(178, 99, 58);
+    background-color: ${(props) => props.theme.darkOrange};
   }
   font-size: 1.5rem;
   width: 3rem;
@@ -20,7 +20,6 @@ export const Button = styled.button`
 export const Div = styled.div`
   width: 60%;
   height: 70%;
-  padding: 0;
   background: white;
   text-align: left;
   position: absolute;
