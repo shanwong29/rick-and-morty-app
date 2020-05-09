@@ -2,31 +2,7 @@ import React, { useContext } from "react";
 import DateFormat from "../DateFormat/DateFormat";
 import DetailCard from "../DetailCard/DetailCard";
 import Context from "../../store/context";
-import styled from "styled-components";
-
-const BUTTON = styled.button`
-  color: rgb(75, 85, 79);
-  background: rgb(192, 207, 195);
-  padding: 0;
-  grid-column: span 1;
-  &:hover {
-    background: rgb(75, 85, 79);
-    color: rgb(192, 207, 195);
-  }
-`;
-
-const DIV = styled.div`
-  width: 80vw;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  position: relative; /*for .mosaic__btn-wrapper*/
-`;
-
-const IMG = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+import * as Styled from "./InfoCard.styles";
 
 const InfoCard = () => {
   console.log("info card");
@@ -48,7 +24,7 @@ const InfoCard = () => {
     const { name, status, species, image, created, id } = el;
 
     return (
-      <BUTTON
+      <Styled.Button
         onClick={() => {
           dispatch({
             type: `UPDATE_ACTIVE_CHAR_POSITION`,
@@ -57,7 +33,7 @@ const InfoCard = () => {
         }}
         key={i}
       >
-        <IMG src={image} alt={name} />
+        <Styled.Img src={image} alt={name} />
         <p>
           {name} id: {id}
         </p>
@@ -66,14 +42,14 @@ const InfoCard = () => {
         </p>
         <p>Species: {species}</p>
         <p>Status: {status}</p>
-      </BUTTON>
+      </Styled.Button>
     );
   });
 
   return (
-    <DIV>
+    <Styled.Div>
       {cardDisplay} {isPopUpOn && <DetailCard modifiedData={modifiedData} />}
-    </DIV>
+    </Styled.Div>
   );
 };
 
