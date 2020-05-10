@@ -110,15 +110,13 @@ const reducer = (state, action) => {
         endDateQuery: action.payload,
       };
 
-    case `CANCEL_ALL_FILTER`:
+    case `CLEAR_ALL_FILTER`:
       return {
         ...state,
         speciesQuery: "",
         statusQuery: "",
         startDateQuery: "",
         endDateQuery: "",
-        currentApiPage: 1,
-        showSecondPart: false,
         activeCharPosition: null,
       };
 

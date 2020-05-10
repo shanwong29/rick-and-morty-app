@@ -55,7 +55,7 @@ const QueryPanel = () => {
 
   const clearAllQuery = () => {
     dispatch({
-      type: `CANCEL_ALL_FILTER`,
+      type: `CLEAR_ALL_FILTER`,
     });
     setSpeciesInput("");
   };

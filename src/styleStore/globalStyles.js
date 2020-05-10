@@ -21,6 +21,7 @@ export default createGlobalStyle`
         border: none;
         outline:none;
         background:none;
+        cursor:pointer;
     }
 
     input{
