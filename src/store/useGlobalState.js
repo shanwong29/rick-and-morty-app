@@ -16,7 +16,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "RECIEVED_DATA":
+    case "RECIEVE_CHAR_DATA":
       return {
         ...state,
         characterData: action.payload.results,
@@ -33,11 +33,12 @@ const reducer = (state, action) => {
         dataInfo: {},
       };
 
-    case `CHANGE_PAGE_NUM`:
-      let targetApiPage = Math.ceil(action.btnNum / 2);
+    case `HANDLE_CHANGE_SITE_PAGE_NUM`:
+      const targetSitePage = action.payload;
+      const targetApiPage = Math.ceil(targetSitePage / 2);
 
       if (targetApiPage !== state.currentApiPage) {
-        if (action.btnNum % 2 === 0) {
+        if (action.payload % 2 === 0) {
           return {
             ...state,
             currentApiPage: targetApiPage,
@@ -55,7 +56,7 @@ const reducer = (state, action) => {
           };
         }
       }
-      if (action.btnNum % 2 === 0) {
+      if (targetSitePage % 2 === 0) {
         return {
           ...state,
           showSecondPart: true,
@@ -66,13 +67,13 @@ const reducer = (state, action) => {
         return { ...state, showSecondPart: false };
       }
 
-    case `UPDATE_ACTIVE_CHAR_POSITION`:
+    case `SET_ACTIVE_CHAR_POSITION`:
       return {
         ...state,
         activeCharPosition: action.payload,
       };
 
-    case `RECIEVED_EPISODE_DATA`:
+    case `RECIEVE_EPISODE_DATA`:
       return {
         ...state,
         episodeData: action.payload,

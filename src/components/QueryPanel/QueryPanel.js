@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Context from "../../store/context";
 
-const QueryInput = () => {
+const QueryPanel = () => {
   console.log("Query Input");
   const { state, dispatch } = useContext(Context);
   const [speciesInput, setSpeciesInput] = useState("");
@@ -114,4 +114,4 @@ const QueryInput = () => {
   );
 };
 
-export default QueryInput;
+export default QueryPanel;

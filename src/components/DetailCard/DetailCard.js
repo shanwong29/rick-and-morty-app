@@ -61,7 +61,7 @@ const DetailCard = () => {
       <Styled.ClosePopUpBtn
         onClick={() => {
           dispatch({
-            type: `UPDATE_ACTIVE_CHAR_POSITION`,
+            type: `SET_ACTIVE_CHAR_POSITION`,
             payload: null,
           });
         }}

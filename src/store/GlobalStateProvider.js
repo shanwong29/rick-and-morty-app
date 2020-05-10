@@ -25,7 +25,7 @@ const GlobalStateProvider = ({ children }) => {
 
       if (collection === "character") {
         dispatch({
-          type: `RECIEVED_DATA`,
+          type: `RECIEVE_CHAR_DATA`,
           payload: { results: response.results, info: response.info },
         });
       } else {
@@ -34,7 +34,7 @@ const GlobalStateProvider = ({ children }) => {
           dataInArr = [{ ...response }];
         }
         dispatch({
-          type: `RECIEVED_EPISODE_DATA`,
+          type: `RECIEVE_EPISODE_DATA`,
           payload: dataInArr,
         });
       }

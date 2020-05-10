@@ -26,7 +26,7 @@ const PageControl = () => {
         isActive={isActive}
         key={i}
         onClick={() => {
-          dispatch({ type: `CHANGE_PAGE_NUM`, btnNum: i });
+          dispatch({ type: `HANDLE_CHANGE_SITE_PAGE_NUM`, payload: i });
         }}
       >
         {i}

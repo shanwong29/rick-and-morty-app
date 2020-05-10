@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import DateFormat from "../DateFormat/DateFormat";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
@@ -8,8 +8,6 @@ const BasicInfoCards = () => {
   console.log("info card");
   const { state, dispatch } = useContext(Context);
   console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
-
-  console.log(state.startDateQuery, state.endDateQuery);
 
   const numOfCardOnEachPage = 10;
 
@@ -34,14 +32,14 @@ const BasicInfoCards = () => {
     );
 
     if (!isCreatedDateWithinQueryPeriod) {
-      return <></>;
+      return <Fragment key={i}></Fragment>;
     }
 
     return (
       <Styled.BasicInfoCard
         onClick={() => {
           dispatch({
-            type: `UPDATE_ACTIVE_CHAR_POSITION`,
+            type: `SET_ACTIVE_CHAR_POSITION`,
             payload: charPosition,
           });
         }}
