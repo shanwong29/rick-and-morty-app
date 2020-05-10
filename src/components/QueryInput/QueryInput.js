@@ -23,16 +23,60 @@ const QueryInput = () => {
     });
   };
 
+  const handleChange = (e, type) => {
+    e.preventDefault();
+    if (!e.target.value) {
+      return;
+    }
+
+    switch (type) {
+      case "startDate":
+        dispatch({
+          type: `UPDATE_START_DATE_QUERY`,
+          payload: e.target.value,
+        });
+        break;
+      case "endDate":
+        dispatch({
+          type: `UPDATE_END_DATE_QUERY`,
+          payload: e.target.value,
+        });
+        break;
+      default:
+        return;
+    }
+
+    const date = e.target.value;
+  };
+
   return (
     <form
       onSubmit={(e) => {
         handleSubmit(e);
       }}
     >
+      <label htmlFor="date">Filter characters by created date: </label>
+      from{" "}
+      <input
+        type="date"
+        name="startDate"
+        id="startDate"
+        onChange={(e) => {
+          handleChange(e, "startDate");
+        }}
+      />{" "}
+      to
+      <input
+        type="date"
+        name="endDate"
+        id="endDate"
+        onChange={(e) => {
+          handleChange(e, "endDate");
+        }}
+      />
       <label for="species">Species: </label>
       <input type="text" id="species" name="species" />
       <label for="Status">Status: </label>
-
       <select id="status">
         <option value="">All</option>
         <option value="alive">Alive</option>

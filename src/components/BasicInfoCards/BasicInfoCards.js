@@ -2,11 +2,14 @@ import React, { useContext } from "react";
 import DateFormat from "../DateFormat/DateFormat";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
+import { dateWithinRangeChecker } from "../../service/dateWithinRangeChecker";
 
 const BasicInfoCards = () => {
   console.log("info card");
   const { state, dispatch } = useContext(Context);
   console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
+
+  console.log(state.startDateQuery, state.endDateQuery);
 
   const numOfCardOnEachPage = 10;
 
@@ -22,6 +25,16 @@ const BasicInfoCards = () => {
     let charPosition = i;
     if (state.showSecondPart) {
       charPosition = i + numOfCardOnEachPage;
+    }
+
+    let isCreatedDateWithinQueryPeriod = dateWithinRangeChecker(
+      created,
+      state.startDateQuery,
+      state.endDateQuery
+    );
+
+    if (!isCreatedDateWithinQueryPeriod) {
+      return <></>;
     }
 
     return (

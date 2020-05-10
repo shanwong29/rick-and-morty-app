@@ -10,6 +10,8 @@ const initialState = {
   episodeData: [],
   speciesQuery: "",
   statusQuery: "",
+  startDateQuery: "",
+  endDateQuery: "",
 };
 
 const reducer = (state, action) => {
@@ -85,6 +87,17 @@ const reducer = (state, action) => {
         currentApiPage: 1,
         showSecondPart: false,
         activeCharPosition: null,
+      };
+
+    case `UPDATE_START_DATE_QUERY`:
+      return {
+        ...state,
+        startDateQuery: action.payload,
+      };
+    case `UPDATE_END_DATE_QUERY`:
+      return {
+        ...state,
+        endDateQuery: action.payload,
       };
 
     default:
