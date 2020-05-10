@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components/macro";
+import { theme } from "./theme";
 
 export default createGlobalStyle`
     * {
@@ -24,7 +25,8 @@ export default createGlobalStyle`
 
     input{
         border-radius: 5px;
-        box-shadow: 0 2px 5px #a8dadc, 0 -2px 5px #f1faee;
-        border: 1px solid #a8dadc;
+        box-shadow: 0 2px 5px ${theme.blue}, 0 -2px 5px ${theme.paleBlue};
+        border: 1px solid ${theme.blue};
+        margin: 5px;
     }
 `;

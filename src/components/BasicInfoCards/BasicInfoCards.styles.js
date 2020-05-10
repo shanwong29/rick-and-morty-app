@@ -2,21 +2,25 @@ import styled from "styled-components";
 
 export const InfoCardsWrapper = styled.div`
   width: 80vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  min-height: 40vw;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 1%;
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const BasicInfoCard = styled.button`
-  color: ${(props) => props.theme.deepGreen};
-  background: ${(props) => props.theme.lightGreen};
-  width: 20%;
+  color: ${({ theme }) => theme.deepGreen};
+  background: ${({ theme }) => theme.lightGreen};
   display: flex;
   align-items: center;
   flex-direction: column;
   &:hover {
-    background: ${(props) => props.theme.deepGreen};
-    color: ${(props) => props.theme.lightGreen};
+    background: ${({ theme }) => theme.deepGreen};
+    color: ${({ theme }) => theme.lightGreen};
   }
 `;
 

@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const ClosePopUpBtn = styled.button`
   color: white;
-  background-color: ${(props) => props.theme.pastelOrange};
+  background-color: ${({ theme }) => theme.pastelOrange};
   border-radius: 50%;
   &:hover {
     color: white;
-    background-color: ${(props) => props.theme.darkOrange};
+    background-color: ${({ theme }) => theme.darkOrange};
   }
   font-size: 1.5rem;
   width: 3rem;

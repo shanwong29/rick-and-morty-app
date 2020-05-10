@@ -3,9 +3,10 @@ export const theme = {
   darkOrange: "#B0361E",
   lightGreen: "#C0CFC3",
   deepGreen: "#4B554F",
-  blue: "#457b9d",
+  blue: "#a8dadc",
+  paleBlue: "#f1faee",
   milkTea: "#8e7054",
-  pink: "#b75d69",
+  // pink: "#b75d69",
 
   fontSizes: {
     sm: "10px",
@@ -14,8 +15,8 @@ export const theme = {
   },
 
   breakpoints: {
-    sm: "(max-width: 420px)",
-    md: "(max-width: 1024px)",
-    lg: "(max-width: 1300px)",
+    sm: "(max-width: 540px)",
+    md: "(max-width: 720px)",
+    lg: "(max-width: 960px)",
   },
 };

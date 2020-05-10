@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Context from "../../store/context";
+import * as Styled from "./QueryPanel.styles";
 
 const QueryPanel = () => {
   console.log("Query Input");
@@ -60,14 +61,14 @@ const QueryPanel = () => {
   };
 
   return (
-    <>
-      <form
+    <Styled.QueryPanel>
+      <Styled.SpeciesQueryForm
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
         <label htmlFor="speciesInput">Species: </label>
-        <input
+        <Styled.SpeciesQueryInput
           type="text"
           id="speciesInput"
           name="speciesInput"
@@ -75,7 +76,7 @@ const QueryPanel = () => {
           value={speciesInput}
           onChange={(e) => handleChange(e)}
         />
-      </form>
+      </Styled.SpeciesQueryForm>
       <label htmlFor="statusInput">Status: </label>
       <select
         id="statusInput"
@@ -109,8 +110,8 @@ const QueryPanel = () => {
         value={state.endDateQuery}
         onChange={(e) => handleChange(e)}
       />
-      <button onClick={clearAllQuery}>CLEAR ALL FILTER</button>
-    </>
+      <Styled.ClearQueryBtn onClick={clearAllQuery}>CLEAR</Styled.ClearQueryBtn>
+    </Styled.QueryPanel>
   );
 };
 
