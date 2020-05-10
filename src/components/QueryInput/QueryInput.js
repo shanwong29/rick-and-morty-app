@@ -1,90 +1,116 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Context from "../../store/context";
 
 const QueryInput = () => {
+  console.log("Query Input");
   const { state, dispatch } = useContext(Context);
+  const [speciesInput, setSpeciesInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newSpeciesQuery = e.target.species.value.trim();
-    const newStatusQuery = e.target.status.value.trim();
-    if (
-      newSpeciesQuery === state.speciesQuery &&
-      newStatusQuery === state.statusQuery
-    ) {
+    const newSpeciesQuery = e.target.speciesInput.value.trim();
+
+    if (newSpeciesQuery === state.speciesQuery) {
       return;
     }
+
     dispatch({
-      type: `UPDATE_QUERY`,
-      payload: {
-        species: newSpeciesQuery,
-        status: newStatusQuery,
-      },
+      type: `SET_SPECIES_QUERY`,
+      payload: newSpeciesQuery,
     });
   };
 
-  const handleChange = (e, type) => {
-    e.preventDefault();
-    if (!e.target.value) {
-      return;
-    }
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case "speciesInput":
+        setSpeciesInput(e.target.value);
+        break;
 
-    switch (type) {
-      case "startDate":
+      case "statusInput":
         dispatch({
-          type: `UPDATE_START_DATE_QUERY`,
+          type: `SET_STATUS_QUERY`,
           payload: e.target.value,
         });
         break;
-      case "endDate":
+
+      case "startDateInput":
         dispatch({
-          type: `UPDATE_END_DATE_QUERY`,
+          type: `SET_START_DATE_QUERY`,
           payload: e.target.value,
         });
         break;
+
+      case "endDateInput":
+        dispatch({
+          type: `SET_END_DATE_QUERY`,
+          payload: e.target.value,
+        });
+        break;
+
       default:
         return;
     }
+  };
 
-    const date = e.target.value;
+  const clearAllQuery = () => {
+    dispatch({
+      type: `CANCEL_ALL_FILTER`,
+    });
+    setSpeciesInput("");
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <label htmlFor="date">Filter characters by created date: </label>
-      from{" "}
-      <input
-        type="date"
-        name="startDate"
-        id="startDate"
-        onChange={(e) => {
-          handleChange(e, "startDate");
+    <>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
         }}
-      />{" "}
-      to
-      <input
-        type="date"
-        name="endDate"
-        id="endDate"
-        onChange={(e) => {
-          handleChange(e, "endDate");
-        }}
-      />
-      <label for="species">Species: </label>
-      <input type="text" id="species" name="species" />
-      <label for="Status">Status: </label>
-      <select id="status">
+      >
+        <label htmlFor="speciesInput">Species: </label>
+        <input
+          type="text"
+          id="speciesInput"
+          name="speciesInput"
+          placeholder="Press enter to submit"
+          value={speciesInput}
+          onChange={(e) => handleChange(e)}
+        />
+      </form>
+      <label htmlFor="statusInput">Status: </label>
+      <select
+        id="statusInput"
+        name="statusInput"
+        onChange={(e) => handleChange(e)}
+      >
+        <option selected={state.statusQuery}>
+          {state.statusQuery && `${state.statusQuery}`}
+        </option>
         <option value="">All</option>
         <option value="alive">Alive</option>
         <option value="dead">Dead</option>
         <option value="unknown">Unknown</option>
       </select>
-      <button type="submit">Search Characters</button>
-    </form>
+      <label htmlFor="startDateInput">
+        Filter characters by created date:{" "}
+      </label>
+      from{" "}
+      <input
+        type="date"
+        name="startDateInput"
+        id="startDateInput"
+        value={state.startDateQuery}
+        onChange={(e) => handleChange(e)}
+      />{" "}
+      to
+      <input
+        type="date"
+        name="endDateInput"
+        id="endDateInput"
+        value={state.endDateQuery}
+        onChange={(e) => handleChange(e)}
+      />
+      <button onClick={clearAllQuery}>CLEAR ALL FILTER</button>
+    </>
   );
 };
 

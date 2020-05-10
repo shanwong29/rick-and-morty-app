@@ -3,11 +3,11 @@ import { useReducer } from "react";
 const initialState = {
   characterData: [],
   dataInfo: {},
+  episodeData: [],
   error: "",
   currentApiPage: 1,
   showSecondPart: false,
   activeCharPosition: null,
-  episodeData: [],
   speciesQuery: "",
   statusQuery: "",
   startDateQuery: "",
@@ -78,26 +78,47 @@ const reducer = (state, action) => {
         episodeData: action.payload,
       };
 
-    case `UPDATE_QUERY`:
-      console.log(action.payload.species, action.payload.status);
+    case `SET_SPECIES_QUERY`:
+      console.log("SECIESQUERY", action.payload);
       return {
         ...state,
-        speciesQuery: action.payload.species,
-        statusQuery: action.payload.status,
+        speciesQuery: action.payload,
         currentApiPage: 1,
         showSecondPart: false,
         activeCharPosition: null,
       };
 
-    case `UPDATE_START_DATE_QUERY`:
+    case `SET_STATUS_QUERY`:
+      console.log("status query", action.payload);
+      return {
+        ...state,
+        statusQuery: action.payload,
+        currentApiPage: 1,
+        showSecondPart: false,
+        activeCharPosition: null,
+      };
+
+    case `SET_START_DATE_QUERY`:
       return {
         ...state,
         startDateQuery: action.payload,
       };
-    case `UPDATE_END_DATE_QUERY`:
+    case `SET_END_DATE_QUERY`:
       return {
         ...state,
         endDateQuery: action.payload,
+      };
+
+    case `CANCEL_ALL_FILTER`:
+      return {
+        ...state,
+        speciesQuery: "",
+        statusQuery: "",
+        startDateQuery: "",
+        endDateQuery: "",
+        currentApiPage: 1,
+        showSecondPart: false,
+        activeCharPosition: null,
       };
 
     default:
