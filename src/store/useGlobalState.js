@@ -4,7 +4,7 @@ const initialState = {
   characterData: [],
   dataInfo: {},
   episodeData: [],
-  error: "",
+  isDataNotFound: false,
   currentApiPage: 1,
   showSecondPart: false,
   activeCharPosition: null,
@@ -21,13 +21,13 @@ const reducer = (state, action) => {
         ...state,
         characterData: action.payload.results,
         dataInfo: action.payload.info,
-        error: "",
+        isDataNotFound: false,
       };
 
-    case `HANDLE_ERROR`:
+    case `SET_DATA_NOT_FOUND`:
       return {
         ...state,
-        error: action.payload,
+        isDataNotFound: true,
         characterData: [],
         episodeData: [],
         dataInfo: {},
@@ -103,11 +103,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         startDateQuery: action.payload,
+        activeCharPosition: null,
       };
     case `SET_END_DATE_QUERY`:
       return {
         ...state,
         endDateQuery: action.payload,
+        activeCharPosition: null,
       };
 
     case `CLEAR_ALL_FILTER`:
@@ -118,6 +120,8 @@ const reducer = (state, action) => {
         startDateQuery: "",
         endDateQuery: "",
         activeCharPosition: null,
+        currentApiPage: 1,
+        showSecondPart: false,
       };
 
     default:

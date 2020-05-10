@@ -16,30 +16,33 @@ const GlobalStateProvider = ({ children }) => {
         `https://rickandmortyapi.com/api/${collection}/${query}`
       );
 
-      console.log(response);
+      console.log("Res", response);
 
-      if (response.error) {
-        console.log("Err returned from API:", response.error);
-        return dispatch({ type: `HANDLE_ERROR`, payload: response.error });
-      }
-
-      if (collection === "character") {
-        dispatch({
-          type: `RECIEVE_CHAR_DATA`,
-          payload: { results: response.results, info: response.info },
-        });
-      } else {
-        let dataInArr = response;
-        if (!response.length) {
-          dataInArr = [{ ...response }];
-        }
-        dispatch({
-          type: `RECIEVE_EPISODE_DATA`,
-          payload: dataInArr,
-        });
+      switch (collection) {
+        case "character":
+          dispatch({
+            type: `RECIEVE_CHAR_DATA`,
+            payload: { results: response.results, info: response.info },
+          });
+          break;
+        case "episode":
+          let dataInArr = response;
+          if (!response.length) {
+            dataInArr = [{ ...response }];
+          }
+          dispatch({
+            type: `RECIEVE_EPISODE_DATA`,
+            payload: dataInArr,
+          });
+          break;
+        default:
+          return;
       }
     } catch (err) {
-      console.log("Err from fetching", err);
+      if (err.response.status === 404) {
+        return dispatch({ type: `SET_DATA_NOT_FOUND`, payload: err });
+      }
+      console.log("error from fetching data: ", err);
     }
   };
 
