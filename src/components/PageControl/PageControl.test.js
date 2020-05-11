@@ -2,38 +2,12 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import Context from "../../store/context";
 import PageControl from "./PageControl.js";
-import { mockCharData } from "../../mockData/mockCharData";
+import { initialState } from "../../testStore/testInitialState";
 
 // *****************************    Below: set up for each test    **********************************
 
-const mockResults = mockCharData.results;
-const mockDataInfo = mockCharData.info;
-
-// const [state] = useGlobalState();
-const initialState = {
-  // initial State
-  characterData: mockResults,
-  dataInfo: mockDataInfo,
-  episodeData: [],
-  isDataNotFound: false,
-  currentApiPage: 1,
-  showSecondPart: false,
-  activeCharPosition: null,
-  speciesQuery: "",
-  statusQuery: "",
-  startDateQuery: "",
-  endDateQuery: "",
-};
-
 const createTestProps = (props) => {
-  console.log({
-    // initial State
-    ...initialState,
-    ...props,
-    characterData: 0,
-  });
   return {
-    // initial State
     ...initialState,
     ...props,
   };
@@ -49,13 +23,9 @@ const testRender = (state) => {
   );
 };
 
-const getRandomNum = (range) => {
-  return Math.floor(Math.random() * range);
+const getRandomNum = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
 };
-
-// afterEach(() => {
-//   cleanup();
-// });
 
 // ************************************************************************************************
 describe("Rendering", () => {
@@ -79,7 +49,7 @@ describe("Rendering", () => {
     const { queryAllByRole } = testRender(props);
     const pagebtns = queryAllByRole("button");
 
-    const randomBtnNum = getRandomNum(pagebtns.length) + 1;
+    const randomBtnNum = getRandomNum(pagebtns.length);
     console.log(randomBtnNum);
 
     fireEvent.click(pagebtns[randomBtnNum - 1]);
