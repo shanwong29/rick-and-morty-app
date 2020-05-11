@@ -22,6 +22,11 @@ export const BasicInfoCard = styled.button`
     background: ${({ theme }) => theme.deepGreen};
     color: ${({ theme }) => theme.lightGreen};
   }
+  grid-row: span 1;
+`;
+
+export const notFoundMsg = styled.h1`
+  grid-column: span 5;
 `;
 
 export const CharImg = styled.img`

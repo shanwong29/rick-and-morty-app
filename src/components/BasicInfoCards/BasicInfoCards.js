@@ -25,11 +25,13 @@ const BasicInfoCards = () => {
 
   const cardDisplay = modifiedData.map((el, i) => {
     const { name, status, species, image, created, id } = el;
+    //for SET_ACTIVE_CHAR_POSITION use
     let charPosition = i;
     if (state.showSecondPart) {
       charPosition = i + numOfCardOnEachPage;
     }
 
+    //Filter by created date on page
     let isCreatedDateWithinQueryPeriod = dateWithinRangeChecker(
       created,
       state.startDateQuery,
@@ -66,7 +68,14 @@ const BasicInfoCards = () => {
     numOfFilteredOutChar === modifiedData.length &&
     state.characterData.length
   ) {
-    return <h1>No character on this page fit the "created date filter."</h1>;
+    return (
+      <Styled.InfoCardsWrapper>
+        <Styled.notFoundMsg>
+          No character on this page fit the "created date filter."
+        </Styled.notFoundMsg>
+        ;
+      </Styled.InfoCardsWrapper>
+    );
   }
   return <Styled.InfoCardsWrapper>{cardDisplay}</Styled.InfoCardsWrapper>;
 };
