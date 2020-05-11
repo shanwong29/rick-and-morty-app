@@ -1,8 +1,5 @@
-import React from "react";
-
-const FormattedDate = ({ timeStamp }) => {
-  console.log("date");
-  let monthEng = {
+export const timeStampFormatter = (timeStamp) => {
+  let monthDict = {
     0: "Jan",
     1: "Feb",
     2: "Mar",
@@ -20,14 +17,8 @@ const FormattedDate = ({ timeStamp }) => {
   let formattedDate = new Date(timeStamp);
   let date = formattedDate.getDate();
   let monthNum = formattedDate.getMonth();
-  let month = monthEng[monthNum];
+  let month = monthDict[monthNum];
   let year = formattedDate.getFullYear();
 
-  return (
-    <span>
-      {date} {month} {year}
-    </span>
-  );
+  return `${date} ${month} ${year}`;
 };
-
-export default React.memo(FormattedDate);

@@ -1,8 +1,8 @@
 import React, { useContext, Fragment } from "react";
-import DateFormat from "../DateFormat/DateFormat";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
 import { dateWithinRangeChecker } from "../../service/dateWithinRangeChecker";
+import { timeStampFormatter } from "../../service/timeStampFormatter";
 
 const BasicInfoCards = () => {
   console.log("info card");
@@ -56,9 +56,7 @@ const BasicInfoCards = () => {
         <p>
           {name} id: {id}
         </p>
-        <p>
-          created on <DateFormat timeStamp={created} />
-        </p>
+        <p>created on {timeStampFormatter(created)} </p>
         <p>Species: {species}</p>
         <p>Status: {status}</p>
       </Styled.BasicInfoCard>

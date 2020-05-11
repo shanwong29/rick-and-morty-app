@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import DateFormat from "../DateFormat/DateFormat";
+import { timeStampFormatter } from "../../service/timeStampFormatter";
 import Context from "../../store/context";
 import * as Styled from "./DetailCard.styles";
 
@@ -45,9 +45,7 @@ const DetailCard = () => {
             <p>
               {name} id: {id}
             </p>
-            <p>
-              created on <DateFormat timeStamp={created} />
-            </p>
+            <p>created on {timeStampFormatter(created)} </p>
             <p>Species: {species}</p>
             <p>Status: {status}</p>
             <p>Gender: {gender}</p>
