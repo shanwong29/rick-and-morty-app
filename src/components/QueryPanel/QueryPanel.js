@@ -83,7 +83,7 @@ const QueryPanel = () => {
         name="statusInput"
         onChange={(e) => handleChange(e)}
       >
-        <option selected={state.statusQuery}>
+        <option defaultValue={state.statusQuery}>
           {state.statusQuery && `${state.statusQuery}`}
         </option>
         <option value="">All</option>
