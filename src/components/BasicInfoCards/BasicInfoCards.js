@@ -7,7 +7,6 @@ import { dateWithinRangeChecker } from "../../service/dateWithinRangeChecker";
 const BasicInfoCards = () => {
   console.log("info card");
   const { state, dispatch } = useContext(Context);
-  console.log("epiReq", state.episodeReq, "epiData", state.episodeData);
 
   //handle Not-found
   if (state.isDataNotFound) {
@@ -66,7 +65,10 @@ const BasicInfoCards = () => {
     );
   });
 
-  if (numOfFilteredOutChar === modifiedData.length) {
+  if (
+    numOfFilteredOutChar === modifiedData.length &&
+    state.characterData.length
+  ) {
     return <h1>No character on this page fit the "created date filter."</h1>;
   }
   return <Styled.InfoCardsWrapper>{cardDisplay}</Styled.InfoCardsWrapper>;
