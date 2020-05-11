@@ -7,8 +7,6 @@ import * as Styled from "./App.styles";
 import GlobalStateProvider from "./store/GlobalStateProvider";
 
 function App() {
-  console.log("APP");
-
   return (
     <GlobalStateProvider>
       <Styled.AppWrapper>

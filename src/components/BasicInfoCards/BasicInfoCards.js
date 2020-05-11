@@ -5,7 +5,6 @@ import { dateWithinRangeChecker } from "../../service/dateWithinRangeChecker";
 import { timeStampFormatter } from "../../service/timeStampFormatter";
 
 const BasicInfoCards = () => {
-  console.log("info card");
   const { state, dispatch } = useContext(Context);
 
   //handle Not-found

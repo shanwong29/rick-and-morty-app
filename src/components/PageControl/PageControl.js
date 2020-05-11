@@ -3,7 +3,6 @@ import Context from "../../store/context";
 import * as Styled from "./PageControl.styles";
 
 const PageControl = () => {
-  console.log("page control");
   const { state, dispatch } = useContext(Context);
 
   const numberOfBtns = Math.ceil(state.dataInfo.count / 10);

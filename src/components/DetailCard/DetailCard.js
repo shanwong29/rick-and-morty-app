@@ -4,7 +4,6 @@ import Context from "../../store/context";
 import * as Styled from "./DetailCard.styles";
 
 const DetailCard = () => {
-  console.log("detail card");
   const { state, dispatch } = useContext(Context);
 
   const isPopUpOn = state.activeCharPosition || state.activeCharPosition === 0;
@@ -56,6 +55,7 @@ const DetailCard = () => {
         <p>Appeared Episode:</p>
         {episodeInfo}
       </Styled.DetailCard>
+
       <Styled.ClosePopUpBtn
         onClick={() => {
           dispatch({

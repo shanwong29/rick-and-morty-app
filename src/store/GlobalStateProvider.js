@@ -16,8 +16,6 @@ const GlobalStateProvider = ({ children }) => {
         `https://rickandmortyapi.com/api/${collection}/${query}`
       );
 
-      console.log("Res", response);
-
       switch (collection) {
         case "character":
           dispatch({
@@ -51,9 +49,6 @@ const GlobalStateProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(
-      `?page=${state.currentApiPage}&species=${state.speciesQuery}&status=${state.statusQuery}`
-    );
     fetchData(
       `?page=${state.currentApiPage}&species=${state.speciesQuery}&status=${state.statusQuery}`
     );

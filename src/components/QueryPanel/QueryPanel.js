@@ -3,7 +3,6 @@ import Context from "../../store/context";
 import * as Styled from "./QueryPanel.styles";
 
 const QueryPanel = () => {
-  console.log("Query Input");
   const { state, dispatch } = useContext(Context);
   const [speciesInput, setSpeciesInput] = useState("");
 
@@ -115,4 +114,4 @@ const QueryPanel = () => {
   );
 };
 
-export default QueryPanel;
+export default React.memo(QueryPanel);

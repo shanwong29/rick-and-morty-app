@@ -38,29 +38,28 @@ const reducer = (state, action) => {
       const targetApiPage = Math.ceil(targetSitePage / 2);
 
       if (targetApiPage !== state.currentApiPage) {
-        if (action.payload % 2 === 0) {
+        if (targetSitePage % 2 === 0) {
           return {
             ...state,
             currentApiPage: targetApiPage,
             showSecondPart: true,
-            // episodeData: [],
             activeCharPosition: null,
           };
         } else {
+          //when targetSitePage is odd number
           return {
             ...state,
             currentApiPage: targetApiPage,
             showSecondPart: false,
-            // episodeData: [],
             activeCharPosition: null,
           };
         }
       }
+      // when targetApiPage === state.currentApiPage
       if (targetSitePage % 2 === 0) {
         return {
           ...state,
           showSecondPart: true,
-          // episodeData: [],
           activeCharPosition: null,
         };
       } else {
@@ -80,7 +79,6 @@ const reducer = (state, action) => {
       };
 
     case `SET_SPECIES_QUERY`:
-      console.log("SECIESQUERY", action.payload);
       return {
         ...state,
         speciesQuery: action.payload,
@@ -90,7 +88,6 @@ const reducer = (state, action) => {
       };
 
     case `SET_STATUS_QUERY`:
-      console.log("status query", action.payload);
       return {
         ...state,
         statusQuery: action.payload,

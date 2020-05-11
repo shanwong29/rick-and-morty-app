@@ -17,8 +17,6 @@ const dateWithinRangeChecker = (targetDate, rangeStartDate, rangeEndDate) => {
     }
   }
 
-  console.log(targetDate, rangeStartDate, rangeEndDate);
-
   return true;
 };
 
