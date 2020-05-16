@@ -5,23 +5,32 @@ import * as Styled from "./QueryPanel.styles";
 const QueryPanel = () => {
   const { state, dispatch } = useContext(Context);
   const [speciesInput, setSpeciesInput] = useState("");
+  const [nameInput, setNameInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newSpeciesQuery = e.target.speciesInput.value.trim();
+    const newNameQuery = e.target.nameInput.value.trim();
 
-    if (newSpeciesQuery === state.speciesQuery) {
+    if (
+      newSpeciesQuery === state.speciesQuery &&
+      newNameQuery === state.nameQuery
+    ) {
       return;
     }
 
     dispatch({
-      type: `SET_SPECIES_QUERY`,
-      payload: newSpeciesQuery,
+      type: `SET_NAME_AND_SPECIES_QUERY`,
+      payload: { newSpeciesQuery, newNameQuery },
     });
   };
 
   const handleChange = (e) => {
     switch (e.target.name) {
+      case "nameInput":
+        setNameInput(e.target.value);
+        break;
+
       case "speciesInput":
         setSpeciesInput(e.target.value);
         break;
@@ -66,6 +75,15 @@ const QueryPanel = () => {
           handleSubmit(e);
         }}
       >
+        <label htmlFor="nameInput">Name: </label>
+        <Styled.SpeciesQueryInput
+          type="text"
+          id="nameInput"
+          name="nameInput"
+          placeholder="Press enter to submit"
+          value={nameInput}
+          onChange={(e) => handleChange(e)}
+        />
         <label htmlFor="speciesInput">Species: </label>
         <Styled.SpeciesQueryInput
           type="text"
@@ -75,7 +93,9 @@ const QueryPanel = () => {
           value={speciesInput}
           onChange={(e) => handleChange(e)}
         />
+        <button type="submit"></button>
       </Styled.SpeciesQueryForm>
+
       <label htmlFor="statusInput">Status: </label>
       <select
         id="statusInput"
@@ -90,7 +110,7 @@ const QueryPanel = () => {
         <option value="dead">Dead</option>
         <option value="unknown">Unknown</option>
       </select>
-      <label htmlFor="startDateInput">
+      {/* <label htmlFor="startDateInput">
         Filter characters by created date:{" "}
       </label>
       from{" "}
@@ -108,7 +128,7 @@ const QueryPanel = () => {
         id="endDateInput"
         value={state.endDateQuery}
         onChange={(e) => handleChange(e)}
-      />
+      /> */}
       <Styled.ClearQueryBtn onClick={clearAllQuery}>CLEAR</Styled.ClearQueryBtn>
     </Styled.QueryPanel>
   );

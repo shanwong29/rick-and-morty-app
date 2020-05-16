@@ -8,6 +8,7 @@ const initialState = {
   currentApiPage: 1,
   showSecondPart: false,
   activeCharPosition: null,
+  nameQuery: "",
   speciesQuery: "",
   statusQuery: "",
   startDateQuery: "",
@@ -78,10 +79,11 @@ const reducer = (state, action) => {
         episodeData: action.payload,
       };
 
-    case `SET_SPECIES_QUERY`:
+    case `SET_NAME_AND_SPECIES_QUERY`:
       return {
         ...state,
-        speciesQuery: action.payload,
+        nameQuery: action.payload.newNameQuery,
+        speciesQuery: action.payload.newSpeciesQuery,
         currentApiPage: 1,
         showSecondPart: false,
         activeCharPosition: null,

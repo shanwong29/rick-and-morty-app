@@ -50,9 +50,14 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     fetchData(
-      `?page=${state.currentApiPage}&species=${state.speciesQuery}&status=${state.statusQuery}`
+      `?page=${state.currentApiPage}&name=${state.nameQuery}&species=${state.speciesQuery}&status=${state.statusQuery}`
     );
-  }, [state.currentApiPage, state.speciesQuery, state.statusQuery]);
+  }, [
+    state.currentApiPage,
+    state.nameQuery,
+    state.speciesQuery,
+    state.statusQuery,
+  ]);
 
   useEffect(() => {
     let charPosition = state.activeCharPosition;
