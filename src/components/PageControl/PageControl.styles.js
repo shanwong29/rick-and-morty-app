@@ -5,7 +5,8 @@ export const PageBtn = styled.button`
   font-size: 1rem;
   padding: 8px;
   visibility: ${({ disabled }) => disabled && "hidden"};
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
   @media ${({ theme }) => theme.breakpoints.sm} {

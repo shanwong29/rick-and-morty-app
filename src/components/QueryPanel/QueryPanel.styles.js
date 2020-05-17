@@ -1,19 +1,15 @@
 import styled from "styled-components";
 
 export const QueryPanel = styled.div`
-  margin: 1% auto;
-  & > label {
-    margin-left: 7px;
+  margin: 1% 0;
+  width: 100%;
+  & > form {
+    display: inline;
   }
-`;
 
-export const SpeciesQueryForm = styled.form`
-  display: inline;
-`;
-
-export const SpeciesQueryInput = styled.input`
-  font-size: 14px;
-  padding: 2px;
+  & > form > input {
+    margin-right: 2%;
+  }
 `;
 
 export const ClearQueryBtn = styled.button`
@@ -25,6 +21,9 @@ export const ClearQueryBtn = styled.button`
     color: white;
     background-color: ${({ theme }) => theme.pastelOrange};
   }
+  &:focus {
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.beige};
+  }
   padding: 5px 10px;
-  margin-left: 7px;
+  margin-left: 2%;
 `;

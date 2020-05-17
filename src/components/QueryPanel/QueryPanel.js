@@ -70,13 +70,13 @@ const QueryPanel = () => {
 
   return (
     <Styled.QueryPanel>
-      <Styled.SpeciesQueryForm
+      <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
         <label htmlFor="nameInput">Name: </label>
-        <Styled.SpeciesQueryInput
+        <input
           type="text"
           id="nameInput"
           name="nameInput"
@@ -85,7 +85,7 @@ const QueryPanel = () => {
           onChange={(e) => handleChange(e)}
         />
         <label htmlFor="speciesInput">Species: </label>
-        <Styled.SpeciesQueryInput
+        <input
           type="text"
           id="speciesInput"
           name="speciesInput"
@@ -94,7 +94,7 @@ const QueryPanel = () => {
           onChange={(e) => handleChange(e)}
         />
         <button type="submit"></button>
-      </Styled.SpeciesQueryForm>
+      </form>
 
       <label htmlFor="statusInput">Status: </label>
       <select
@@ -110,6 +110,7 @@ const QueryPanel = () => {
         <option value="dead">Dead</option>
         <option value="unknown">Unknown</option>
       </select>
+
       {/* <label htmlFor="startDateInput">
         Filter characters by created date:{" "}
       </label>

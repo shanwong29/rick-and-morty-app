@@ -2,7 +2,6 @@ import React, { useContext, Fragment } from "react";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
 import { dateWithinRangeChecker } from "../../service/dateWithinRangeChecker";
-import { timeStampFormatter } from "../../service/timeStampFormatter";
 
 const BasicInfoCards = () => {
   const { state, dispatch } = useContext(Context);
@@ -46,20 +45,26 @@ const BasicInfoCards = () => {
     return (
       <Styled.BasicInfoCard
         onClick={() => {
-          dispatch({
-            type: `SET_ACTIVE_CHAR_POSITION`,
-            payload: charPosition,
-          });
+          state.activeCharPosition !== charPosition &&
+            dispatch({
+              type: `SET_ACTIVE_CHAR_POSITION`,
+              payload: charPosition,
+            });
         }}
         key={i}
+        isActive={
+          i ===
+          (typeof state.activeCharPosition === "number" &&
+            state.activeCharPosition % 10)
+        }
       >
-        <Styled.CharImg src={image} alt={name} />
-        <p>
-          {name} id: {id}
-        </p>
-        <p>created on {timeStampFormatter(created)} </p>
-        <p>Species: {species}</p>
-        <p>Status: {status}</p>
+        <img src={image} alt={name} />
+        <Styled.TextWrapper>
+          <h2>{name}</h2>
+          <p>
+            No: {id} | {species} | {status}
+          </p>
+        </Styled.TextWrapper>
       </Styled.BasicInfoCard>
     );
   });
