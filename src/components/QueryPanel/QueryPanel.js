@@ -42,19 +42,19 @@ const QueryPanel = () => {
         });
         break;
 
-      case "startDateInput":
-        dispatch({
-          type: `SET_START_DATE_QUERY`,
-          payload: e.target.value,
-        });
-        break;
+      // case "startDateInput":
+      //   dispatch({
+      //     type: `SET_START_DATE_QUERY`,
+      //     payload: e.target.value,
+      //   });
+      //   break;
 
-      case "endDateInput":
-        dispatch({
-          type: `SET_END_DATE_QUERY`,
-          payload: e.target.value,
-        });
-        break;
+      // case "endDateInput":
+      //   dispatch({
+      //     type: `SET_END_DATE_QUERY`,
+      //     payload: e.target.value,
+      //   });
+      //   break;
 
       default:
         return;
@@ -66,15 +66,16 @@ const QueryPanel = () => {
       type: `CLEAR_ALL_FILTER`,
     });
     setSpeciesInput("");
+    setNameInput("");
   };
 
   return (
-    <Styled.QueryPanel>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
+    <Styled.QueryForm
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <div>
         <label htmlFor="nameInput">Name: </label>
         <input
           type="text"
@@ -84,6 +85,8 @@ const QueryPanel = () => {
           value={nameInput}
           onChange={(e) => handleChange(e)}
         />
+      </div>
+      <div>
         <label htmlFor="speciesInput">Species: </label>
         <input
           type="text"
@@ -93,25 +96,34 @@ const QueryPanel = () => {
           value={speciesInput}
           onChange={(e) => handleChange(e)}
         />
-        <button type="submit"></button>
-      </form>
+      </div>
+      <div>
+        <label htmlFor="statusInput">Status: </label>
+        <select
+          id="statusInput"
+          name="statusInput"
+          onChange={(e) => handleChange(e)}
+        >
+          <option defaultValue={state.statusQuery}>
+            {state.statusQuery && `${state.statusQuery}`}
+          </option>
+          <option value="">All</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
 
-      <label htmlFor="statusInput">Status: </label>
-      <select
-        id="statusInput"
-        name="statusInput"
-        onChange={(e) => handleChange(e)}
-      >
-        <option defaultValue={state.statusQuery}>
-          {state.statusQuery && `${state.statusQuery}`}
-        </option>
-        <option value="">All</option>
-        <option value="alive">Alive</option>
-        <option value="dead">Dead</option>
-        <option value="unknown">Unknown</option>
-      </select>
+      <Styled.SubmitBtn type="submit"></Styled.SubmitBtn>
 
-      {/* <label htmlFor="startDateInput">
+      <Styled.ClearQueryBtn onClick={clearAllQuery}>CLEAR</Styled.ClearQueryBtn>
+    </Styled.QueryForm>
+  );
+};
+
+export default React.memo(QueryPanel);
+
+/* <label htmlFor="startDateInput">
         Filter characters by created date:{" "}
       </label>
       from{" "}
@@ -129,10 +141,4 @@ const QueryPanel = () => {
         id="endDateInput"
         value={state.endDateQuery}
         onChange={(e) => handleChange(e)}
-      /> */}
-      <Styled.ClearQueryBtn onClick={clearAllQuery}>CLEAR</Styled.ClearQueryBtn>
-    </Styled.QueryPanel>
-  );
-};
-
-export default React.memo(QueryPanel);
+      /> */

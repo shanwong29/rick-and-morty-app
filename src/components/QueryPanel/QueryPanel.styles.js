@@ -1,15 +1,25 @@
 import styled from "styled-components";
 
-export const QueryPanel = styled.div`
+export const QueryForm = styled.form`
+  width: 70vw;
   margin: 1% 0;
-  width: 100%;
-  & > form {
-    display: inline;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-  & > form > input {
-    margin-right: 2%;
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    width: 90vw;
+    justify-content: space-between;
+    & > div > label {
+      display: inline-block;
+      width: 60px;
+      text-align: left;
+    }
   }
+`;
+
+export const SubmitBtn = styled.button`
+  display: none;
 `;
 
 export const ClearQueryBtn = styled.button`
@@ -25,5 +35,5 @@ export const ClearQueryBtn = styled.button`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.beige};
   }
   padding: 5px 10px;
-  margin-left: 2%;
+  margin: 3px;
 `;
