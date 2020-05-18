@@ -22,6 +22,7 @@ const reducer = (state, action) => {
         ...state,
         characterData: action.payload.results,
         dataInfo: action.payload.info,
+        episodeData: [],
         isDataNotFound: false,
       };
 
@@ -62,15 +63,22 @@ const reducer = (state, action) => {
           ...state,
           showSecondPart: true,
           activeCharPosition: null,
+          episodeData: [],
         };
       } else {
-        return { ...state, showSecondPart: false };
+        return {
+          ...state,
+          showSecondPart: false,
+          activeCharPosition: null,
+          episodeData: [],
+        };
       }
 
     case `SET_ACTIVE_CHAR_POSITION`:
       return {
         ...state,
         activeCharPosition: action.payload,
+        episodeData: [],
       };
 
     case `RECIEVE_EPISODE_DATA`:
@@ -121,6 +129,7 @@ const reducer = (state, action) => {
         activeCharPosition: null,
         currentApiPage: 1,
         showSecondPart: false,
+        episodeData: [],
       };
 
     default:
