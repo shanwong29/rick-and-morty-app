@@ -68,7 +68,3 @@ export const TextWrapper = styled.div`
     }
   }
 `;
-
-export const notFoundMsg = styled.h1`
-  grid-column: span 5;
-`;

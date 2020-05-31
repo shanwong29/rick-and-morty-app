@@ -42,20 +42,6 @@ const QueryPanel = () => {
         });
         break;
 
-      // case "startDateInput":
-      //   dispatch({
-      //     type: `SET_START_DATE_QUERY`,
-      //     payload: e.target.value,
-      //   });
-      //   break;
-
-      // case "endDateInput":
-      //   dispatch({
-      //     type: `SET_END_DATE_QUERY`,
-      //     payload: e.target.value,
-      //   });
-      //   break;
-
       default:
         return;
     }
@@ -119,24 +105,4 @@ const QueryPanel = () => {
   );
 };
 
-export default React.memo(QueryPanel);
-
-/* <label htmlFor="startDateInput">
-        Filter characters by created date:{" "}
-      </label>
-      from{" "}
-      <input
-        type="date"
-        name="startDateInput"
-        id="startDateInput"
-        value={state.startDateQuery}
-        onChange={(e) => handleChange(e)}
-      />{" "}
-      to
-      <input
-        type="date"
-        name="endDateInput"
-        id="endDateInput"
-        value={state.endDateQuery}
-        onChange={(e) => handleChange(e)}
-      /> */
+export default QueryPanel;

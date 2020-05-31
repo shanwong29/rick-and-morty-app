@@ -11,8 +11,6 @@ const initialState = {
   nameQuery: "",
   speciesQuery: "",
   statusQuery: "",
-  startDateQuery: "",
-  endDateQuery: "",
 };
 
 const reducer = (state, action) => {
@@ -103,19 +101,6 @@ const reducer = (state, action) => {
         statusQuery: action.payload,
         currentApiPage: 1,
         showSecondPart: false,
-        activeCharPosition: null,
-      };
-
-    case `SET_START_DATE_QUERY`:
-      return {
-        ...state,
-        startDateQuery: action.payload,
-        activeCharPosition: null,
-      };
-    case `SET_END_DATE_QUERY`:
-      return {
-        ...state,
-        endDateQuery: action.payload,
         activeCharPosition: null,
       };
 
