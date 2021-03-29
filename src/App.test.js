@@ -1,9 +1,10 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 
 import App from "./App";
 import GlobalStateProvider from "./store/GlobalStateProvider";
-import { initialState } from "./testStore/testInitialState";
+import { allCharData } from "./__mocks__/data/allCharData";
 
 // *****************************    Below: set up for each test    **********************************
 
@@ -17,20 +18,18 @@ const testRender = () => {
 
 // ************************************************************************************************
 describe("Rendering", () => {
-  it("should fetch `mockCharData` and show the first 10 data", (done) => {
-    const renderOutput = testRender();
-    setTimeout(() => {
-      const firstDisplayCharName = initialState.characterData[0].name;
-      const lastDisplayCharName = initialState.characterData[9].name;
+  it("should fetch `mockCharData` and show the first 10 data", async () => {
+    testRender();
 
-      expect(
-        renderOutput.getByAltText(`${firstDisplayCharName}`)
-      ).toBeInTheDocument();
-      expect(
-        renderOutput.getByAltText(`${lastDisplayCharName}`)
-      ).toBeInTheDocument();
+    const firstDisplayCharName = allCharData[0].name;
+    const lastDisplayCharName = allCharData[9].name;
 
-      done();
-    });
+    await waitFor(() =>
+      expect(screen.getByAltText(`${firstDisplayCharName}`)).toBeInTheDocument()
+    );
+
+    screen.debug();
+
+    expect(screen.getByAltText(`${lastDisplayCharName}`)).toBeInTheDocument();
   });
 });

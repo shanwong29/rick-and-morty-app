@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-const initialState = {
+export const initialState = {
   characterData: [],
   dataInfo: {},
   episodeData: [],

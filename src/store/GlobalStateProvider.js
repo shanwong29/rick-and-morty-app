@@ -49,10 +49,11 @@ const GlobalStateProvider = ({ children }) => {
           return;
       }
     } catch (err) {
-      if (err.response.status === 404) {
+      if (err.response && err.response.status === 404) {
         return dispatch({ type: `SET_DATA_NOT_FOUND`, payload: err });
+      } else {
+        console.log("error from fetching data: ", err);
       }
-      console.log("error from fetching data: ", err);
     }
   };
 
