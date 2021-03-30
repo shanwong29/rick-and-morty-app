@@ -49,7 +49,10 @@ const mockApiCharResponse = (params) => {
         prevPage &&
         `https://rickandmortyapi.com/api/character/?page=${prevPage}`,
     },
-    results: requestedChar.slice(0, 19),
+    results: requestedChar.slice(
+      requestedPage * 20 - 20,
+      requestedPage * 20 - 1
+    ),
   };
 };
 
@@ -57,14 +60,17 @@ const mockEpisodeData = (strOfEpiNum) => {
   const arrOfEpiNum = strOfEpiNum.split(",");
 
   const requestedEpi = arrOfEpiNum.map((epNum) => {
-    allEpisodeData[epNum - 1];
+    epNum = Number(epNum);
+    return allEpisodeData[epNum - 1];
   });
+
   return requestedEpi;
 };
 
-const get = (url, { params }) => {
+const get = (url, requestParams) => {
+  const params = requestParams ? requestParams.params : null;
   if (url.includes("episode")) {
-    const strOfEpiNum = url.slice(url.lastIndexof("/") + 1);
+    const strOfEpiNum = url.slice(url.lastIndexOf("/") + 1);
     return Promise.resolve({ data: mockEpisodeData(strOfEpiNum) });
   } else if (url.includes("character")) {
     const response = mockApiCharResponse(params);

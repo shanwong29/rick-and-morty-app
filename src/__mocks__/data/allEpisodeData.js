@@ -1,4 +1,4 @@
-const allEpisodeData = [
+export const allEpisodeData = [
   {
     id: 1,
     name: "Pilot",

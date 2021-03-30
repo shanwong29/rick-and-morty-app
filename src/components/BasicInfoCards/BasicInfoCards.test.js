@@ -1,79 +1,70 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import Context from "../../store/context";
-import BasicInfoCards from "./BasicInfoCards.js";
-import { initialState } from "../../testStore/testInitialState";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../../styleStore/theme";
+import { render, screen, waitFor } from "@testing-library/react";
+import App from "../../App";
+import { allCharData } from "../../__mocks__/data/allCharData";
+import { allEpisodeData } from "../../__mocks__/data/allEpisodeData";
 
-// *****************************    Below: set up for each test    **********************************
+import userEvent from "@testing-library/user-event";
 
-const createTestProps = (props) => {
-  return {
-    ...initialState,
-    ...props,
-  };
-};
+beforeEach(async () => {
+  render(<App />);
+  const firstDisplayCharName = allCharData[0].name;
 
-const dispatch = jest.fn();
-
-const testRender = (state) => {
-  return render(
-    <Context.Provider value={{ state, dispatch }}>
-      <ThemeProvider theme={theme}>
-        <BasicInfoCards />
-      </ThemeProvider>
-    </Context.Provider>
+  await waitFor(() =>
+    expect(screen.getByAltText(`${firstDisplayCharName}`)).toBeInTheDocument()
   );
-};
+});
 
-// ************************************************************************************************
-describe("Rendering when there is data", () => {
-  it("should show 10 character images", () => {
-    const { queryAllByRole } = testRender(createTestProps({}));
-    const charImgs = queryAllByRole("img");
-    expect(charImgs).toHaveLength(10);
+describe("When user click a character card", () => {
+  const selectedChar = allCharData[6];
+  beforeEach(async () => {
+    userEvent.click(screen.getByAltText(selectedChar.name));
+    await screen.findByText("Appeared Episode");
+  });
+  it("should show all the epsode the character appeared", () => {
+    const appearedEpisode = selectedChar.episode.map((epLink) => {
+      const epNum = Number(epLink.slice(epLink.lastIndexOf("/") + 1));
+
+      const epName = allEpisodeData[epNum - 1].name;
+      return epName;
+    });
+
+    for (const epName of appearedEpisode) {
+      expect(screen.getByText(epName)).toBeInTheDocument();
+    }
   });
 
-  describe("when state.showSecondPart is false", () => {
-    const firstDisplayCharName = initialState.characterData[0].name;
-    const lastDisplayCharName = initialState.characterData[9].name;
-    it("should show the 1st to 10th data", () => {
-      const { getByAltText } = testRender(
-        createTestProps({ showSecondPart: false })
-      );
+  it("should show gender, origin, location and created date of the character", () => {
+    const expectedTexts = [
+      "Earth (Replacement Dimension)",
+      "Testicle Monster Dimension",
+      "Male",
+    ];
 
-      expect(getByAltText(`${firstDisplayCharName}`)).toBeInTheDocument();
-      expect(getByAltText(`${lastDisplayCharName}`)).toBeInTheDocument();
+    for (const expectedText of expectedTexts) {
+      expect(screen.getByText(expectedText)).toBeInTheDocument();
+    }
+
+    expect(
+      screen.getByText("4 Nov 2017", { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  describe("When user click clear button", () => {
+    it("should close the pop up card", async () => {
+      userEvent.click(screen.getByText("CLEAR"));
+      await expect(
+        screen.queryByText("Appeared Episode")
+      ).not.toBeInTheDocument();
     });
   });
 
-  describe("when state.showSecondPart is true", () => {
-    const firstDisplayCharName = initialState.characterData[10].name;
-    const lastDisplayCharName = initialState.characterData[19].name;
-    it("should show the 11st to 20th data", () => {
-      const { getByAltText } = testRender(
-        createTestProps({ showSecondPart: true })
-      );
-      expect(getByAltText(`${firstDisplayCharName}`)).toBeInTheDocument();
-      expect(getByAltText(`${lastDisplayCharName}`)).toBeInTheDocument();
-    });
-  });
-
-  describe("when there is no character data", () => {
-    let renderOutput;
-    beforeEach(() => {
-      renderOutput = testRender(
-        createTestProps({ characterData: [], dataInfo: {} })
-      );
-    });
-    it("should show no images", () => {
-      const charImgs = renderOutput.queryAllByRole("img");
-      expect(charImgs).toHaveLength(0);
-    });
-
-    it("should show no text", () => {
-      expect(renderOutput.queryAllByText(/[0-9A-Z]+/i)).toHaveLength(0);
+  describe("When user click cross button", () => {
+    it("should close the pop up card", async () => {
+      userEvent.click(screen.getByText("\u2715"));
+      await expect(
+        screen.queryByText("Appeared Episode")
+      ).not.toBeInTheDocument();
     });
   });
 });

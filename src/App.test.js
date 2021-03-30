@@ -4,6 +4,8 @@ import App from "./App";
 import { allCharData } from "./__mocks__/data/allCharData";
 
 describe("Inital render when api response is successful", () => {
+  const lastPage = Math.ceil(allCharData.length / 10);
+
   beforeEach(async () => {
     render(<App />);
     const firstDisplayCharName = allCharData[0].name;
@@ -40,9 +42,17 @@ describe("Inital render when api response is successful", () => {
       expect(pageBtn).toBeInTheDocument();
     }
 
-    const lastPageBtn = screen.getByText(Math.ceil(allCharData.length / 10), {
+    const lastPageBtn = screen.getByText(lastPage, {
       selector: "button",
     });
     expect(lastPageBtn).toBeInTheDocument();
+  });
+
+  it("should not show page which are greater than 10 and not the last page", () => {
+    for (let i = 10 + 1; i < lastPage; i++) {
+      expect(
+        screen.queryByText(i, { selector: "button" })
+      ).not.toBeInTheDocument();
+    }
   });
 });
