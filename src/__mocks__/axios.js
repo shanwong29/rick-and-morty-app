@@ -12,11 +12,19 @@ const mockApiCharResponse = (params) => {
     const speciesMatched = species ? speciesRegex.test(el.species) : true;
 
     const statusMatched = status
-      ? el.status.lowercase().startsWith(status.lowercase())
+      ? el.status.toLowerCase().startsWith(status.toLowerCase())
       : true;
 
     return nameMatched && speciesMatched && statusMatched;
   });
+
+  if (requestedChar.length <= 0) {
+    return {
+      error: {
+        status: 404,
+      },
+    };
+  }
 
   const pagesCount = Math.ceil(requestedChar.length / 20);
 
@@ -41,7 +49,7 @@ const mockApiCharResponse = (params) => {
         prevPage &&
         `https://rickandmortyapi.com/api/character/?page=${prevPage}`,
     },
-    results: requestedChar,
+    results: requestedChar.slice(0, 19),
   };
 };
 
@@ -55,12 +63,15 @@ const mockEpisodeData = (strOfEpiNum) => {
 };
 
 const get = (url, { params }) => {
-  console.log("???", url, params);
   if (url.includes("episode")) {
     const strOfEpiNum = url.slice(url.lastIndexof("/") + 1);
     return Promise.resolve({ data: mockEpisodeData(strOfEpiNum) });
   } else if (url.includes("character")) {
-    return Promise.resolve({ data: mockApiCharResponse(params) });
+    const response = mockApiCharResponse(params);
+    if (response.error) {
+      return Promise.reject({ response: response.error });
+    }
+    return Promise.resolve({ data: response });
   } else {
     throw new Error("collection not registered");
   }

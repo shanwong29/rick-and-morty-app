@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-export const initialState = {
+const initialState = {
   characterData: [],
   dataInfo: {},
   episodeData: [],
@@ -109,8 +109,7 @@ const reducer = (state, action) => {
         ...state,
         speciesQuery: "",
         statusQuery: "",
-        startDateQuery: "",
-        endDateQuery: "",
+        nameQuery: "",
         activeCharPosition: null,
         currentApiPage: 1,
         showSecondPart: false,

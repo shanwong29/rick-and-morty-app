@@ -9,8 +9,8 @@ const QueryPanel = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newSpeciesQuery = e.target.speciesInput.value.trim();
-    const newNameQuery = e.target.nameInput.value.trim();
+    const newSpeciesQuery = speciesInput.trim();
+    const newNameQuery = nameInput.trim();
 
     if (
       newSpeciesQuery === state.speciesQuery &&
@@ -56,52 +56,53 @@ const QueryPanel = () => {
   };
 
   return (
-    <Styled.QueryForm
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <div>
-        <label htmlFor="nameInput">Name: </label>
-        <input
-          type="text"
-          id="nameInput"
-          name="nameInput"
-          placeholder="Press enter to submit"
-          value={nameInput}
-          onChange={(e) => handleChange(e)}
-        />
-      </div>
-      <div>
-        <label htmlFor="speciesInput">Species: </label>
-        <input
-          type="text"
-          id="speciesInput"
-          name="speciesInput"
-          placeholder="Press enter to submit"
-          value={speciesInput}
-          onChange={(e) => handleChange(e)}
-        />
-      </div>
-      <div>
-        <label htmlFor="statusInput">Status: </label>
-        <select
-          id="statusInput"
-          name="statusInput"
-          onChange={(e) => handleChange(e)}
-          value={state.statusQuery}
-        >
-          <option value="">All</option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </div>
+    <Styled.QueryPanelWrapper>
+      <Styled.QueryForm
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <div>
+          <label htmlFor="nameInput">Name: </label>
+          <input
+            type="text"
+            id="nameInput"
+            name="nameInput"
+            placeholder="Press enter to submit"
+            value={nameInput}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor="speciesInput">Species: </label>
+          <input
+            type="text"
+            id="speciesInput"
+            name="speciesInput"
+            placeholder="Press enter to submit"
+            value={speciesInput}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor="statusInput">Status: </label>
+          <select
+            id="statusInput"
+            name="statusInput"
+            onChange={(e) => handleChange(e)}
+            value={state.statusQuery}
+          >
+            <option value="">All</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
 
-      <Styled.SubmitBtn type="submit"></Styled.SubmitBtn>
-
+        <Styled.SubmitBtn type="submit"></Styled.SubmitBtn>
+      </Styled.QueryForm>
       <Styled.ClearQueryBtn onClick={clearAllQuery}>CLEAR</Styled.ClearQueryBtn>
-    </Styled.QueryForm>
+    </Styled.QueryPanelWrapper>
   );
 };
 

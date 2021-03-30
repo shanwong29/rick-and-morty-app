@@ -1,14 +1,23 @@
 import styled from "styled-components";
 
-export const QueryForm = styled.form`
+export const QueryPanelWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   width: 70vw;
   margin: 1% 0;
+  justify-content: space-around;
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    width: 90vw;
+    justify-content: end;
+  }
+`;
+
+export const QueryForm = styled.form`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
   @media ${({ theme }) => theme.breakpoints.sm} {
-    width: 90vw;
     justify-content: space-between;
     & > div > label {
       display: inline-block;
