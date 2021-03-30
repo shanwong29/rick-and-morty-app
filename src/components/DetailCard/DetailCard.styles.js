@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const ClosePopUpBtn = styled.button`
   color: white;
-  background-color: ${({ theme }) => theme.pastelOrange};
+  background-color: ${({ theme }) => theme.secondary.main};
   border-radius: 50%;
   &:hover {
     color: white;
-    background-color: ${({ theme }) => theme.darkOrange};
+    background-color: ${({ theme }) => theme.secondary.dark};
   }
   &:focus {
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.darkOrange};
+    background-color: ${({ theme }) => theme.secondary.dark};
   }
   font-size: 1.5rem;
   width: 3rem;
@@ -35,10 +35,11 @@ export const DetailCard = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
+  border-radius: 5px;
   transform: translate(-50%, -50%);
   overflow: auto;
   box-shadow: 20px 20px 30px ${({ theme }) => theme.shadowColor},
-    -20px -20px 30px ${({ theme }) => theme.shadowColor};
+    -10px -10px 20px ${({ theme }) => theme.shadowColor};
   @media ${({ theme }) => theme.breakpoints.sm} {
     width: 80vw;
     height: 80vh;
@@ -60,7 +61,7 @@ export const TextInfoWrapper = styled.div`
   margin: 10px 20px;
 
   & > h1 {
-    color: ${({ theme }) => theme.milkTea};
+    color: ${({ theme }) => theme.secondary.main};
   }
 
   @media ${({ theme }) => theme.breakpoints.sm} {
@@ -87,7 +88,7 @@ export const SubTitle = styled.p`
 export const EpNum = styled.span`
   display: inline-block;
   width: 70px;
-  background: ${({ theme }) => theme.morandiPink};
+  background: ${({ theme }) => theme.primary.main};
   color: white;
   border-radius: 5px;
   font-size: 14px;

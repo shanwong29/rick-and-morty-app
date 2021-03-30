@@ -1,15 +1,17 @@
 export const theme = {
-  pastelOrange: "#EE6C4D",
-  darkOrange: "#e63946",
-  lightGreen: "#C0CFC3",
-  deepGreen: "#4B554F",
+  secondary: { main: "#fe615f", dark: "#e63946" },
+  primary: {
+    main: "#435cff",
+    lighten1: "#e0ecfa",
+    lighten3: "#f4f9fc",
+  },
+  grey: {
+    main: "#b7b7b7",
+  },
   blue: "#a8dadc",
   paleBlue: "#f1faee",
   beige: "#eee8d5",
-  milkTea: "#8e7054",
-  morandiPink: "#b36a5e",
   shadowColor: "rgba(0, 0, 0, 0.5)",
-  // pink: "#b75d69",
 
   fontSizes: {
     sm: "10px",

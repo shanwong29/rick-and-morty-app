@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const PageBtn = styled.button`
-  color: ${({ isActive, theme }) => (isActive ? "red" : theme.milkTea)};
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.primary.main : theme.grey.main};
   font-size: 1rem;
   padding: 8px;
   visibility: ${({ disabled }) => disabled && "hidden"};

@@ -31,6 +31,10 @@ export default createGlobalStyle`
         margin: 3px 5px;
         font-size: 14px;
         padding: 4px;
+        outline: ${theme.primary.main};
+        :hover{
+            border: 1px solid  ${theme.primary.main};
+        }
     }
 
     select{
@@ -41,6 +45,9 @@ export default createGlobalStyle`
         font-size: 14px;
         padding: 2px 4px;
         margin: 3px 5px;
-    }
+        outline: none;
+        :hover{
+            border: 1px solid  ${theme.primary.main};
+        }}
 
 `;
