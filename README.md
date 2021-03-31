@@ -8,7 +8,7 @@ User can search characters by querying the characters' name, species and status.
 
 You may view it on the deployment page: [Rick and Morty App](https://shanwong29.github.io/rick-and-morty-app/)
 
-## What I have achieved...
+## Achieved...
 
 1. practice the use of **React hooks** -- **custom hook**, **useReducer** and **useContext**;
 2. practice the use of **styled-components**;
@@ -36,15 +36,29 @@ The conatiner can be accessed at [http://localhost:3000](http://localhost:3000).
 
 Every edit in the public or src folder will automatically be reflected in the app running in the container.
 
-## Things that I would like to improve
+## Testing
 
-1. **Testing**
+Tests were built with React Testing Library and Jest.
 
-More testing should be included. Reducer logic should better be included in testing.
+```
+npm run test
+```
 
-2. **File Struture**
+## Deployment
 
-The data fetching logic should better be seperated from `GlobalStateProvider` component.
+### Automatic
+
+CICD is built with GitHub Actions. Push or merge to master branch will trigger build and release to the deployment page.
+
+Related ymal file can be found in folder `/.github`
+
+### Manual
+
+`gh-pages` has been also installed and setup. Manual deployment can be done with the following command:
+
+```
+npm run deploy
+```
 
 ## Built with
 
@@ -54,3 +68,4 @@ The data fetching logic should better be seperated from `GlobalStateProvider` co
 4. Jest
 5. React Testing Library
 6. [The Rick and Morty API](https://rickandmortyapi.com/)
+7. GitHub Actions
