@@ -9,15 +9,27 @@ import axios from "axios";
 
 const GlobalStateProvider = ({ children }) => {
   const [state, dispatch] = useGlobalState();
-
-  const fetchData = async (query, collection = "character") => {
+  const fetchData = async (collection = "character") => {
     let response;
     try {
       if (collection === "episode") {
+        const charPosition = state.activeCharPosition;
+        if (!charPosition && charPosition !== 0) {
+          return;
+        }
+        const activeCharEpiInfo = state.characterData[charPosition].episode;
+        const episodeReq = getEpiNumReqStr(activeCharEpiInfo);
         response = await axios.get(
-          `https://rickandmortyapi.com/api/${collection}/${query}`
+          `https://rickandmortyapi.com/api/${collection}/${episodeReq}`
         );
       } else {
+        // querying character
+        const query = {
+          page: state.currentApiPage,
+          name: state.nameQuery,
+          species: state.speciesQuery,
+          status: state.statusQuery,
+        };
         response = await axios.get(
           `https://rickandmortyapi.com/api/${collection}/`,
           {
@@ -57,31 +69,21 @@ const GlobalStateProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchData({
-      page: state.currentApiPage,
-      name: state.nameQuery,
-      species: state.speciesQuery,
-      status: state.statusQuery,
-    });
-  }, [
-    state.currentApiPage,
-    state.nameQuery,
-    state.speciesQuery,
-    state.statusQuery,
-  ]);
+  useEffect(
+    () => {
+      fetchData();
+    },
+    /* eslint-disable-line react-hooks/exhaustive-deps*/ [
+      state.currentApiPage,
+      state.nameQuery,
+      state.speciesQuery,
+      state.statusQuery,
+    ]
+  );
 
   useEffect(() => {
-    let charPosition = state.activeCharPosition;
-
-    if (!charPosition && charPosition !== 0) {
-      return;
-    }
-    const activeCharEpiInfo = state.characterData[charPosition].episode;
-    const episodeReq = getEpiNumReqStr(activeCharEpiInfo);
-
-    fetchData(`${episodeReq}`, `episode`);
-  }, [state.activeCharPosition]);
+    fetchData("episode");
+  }, [state.activeCharPosition]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Context.Provider value={{ state, dispatch }}>
