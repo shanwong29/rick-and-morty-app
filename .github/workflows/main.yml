@@ -5,6 +5,7 @@ on:
       - ".github/workflows/main.yml"
       - "src/**"
       - "public/**"
+      - "package*.json"
     branches:
       - master
 
