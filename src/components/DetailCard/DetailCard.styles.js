@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const ClosePopUpBtn = styled.button`
   color: white;
-  background-color: ${({ theme }) => theme.secondary.main};
+  background-color: ${({ theme }) => theme.accent.darken1};
   border-radius: 50%;
   &:hover {
     color: white;
-    background-color: ${({ theme }) => theme.secondary.dark};
+    background-color: ${({ theme }) => theme.accent.dark};
   }
   &:focus {
-    background-color: ${({ theme }) => theme.secondary.dark};
+    background-color: ${({ theme }) => theme.accent.dark};
   }
   font-size: 1.5rem;
   width: 3rem;
@@ -61,7 +61,7 @@ export const TextInfoWrapper = styled.div`
   margin: 10px 20px;
 
   & > h1 {
-    color: ${({ theme }) => theme.secondary.main};
+    color: ${({ theme }) => theme.accent.main};
   }
 
   @media ${({ theme }) => theme.breakpoints.sm} {

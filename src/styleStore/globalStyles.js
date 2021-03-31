@@ -26,27 +26,27 @@ export default createGlobalStyle`
 
     input{
         border-radius: 5px;
-        box-shadow: 0 2px 5px ${theme.blue}, 0 -2px 5px ${theme.paleBlue};
-        border: 1px solid ${theme.blue};
+        box-shadow: 0 2px 5px ${theme.primary.lighten1}, 0 -2px 5px ${theme.primary.lighten2};
+        border: 1px solid ${theme.primary.lighten1};
         margin: 3px 5px;
         font-size: 14px;
         padding: 4px;
-        outline: ${theme.primary.main};
-        :hover{
+        outline: none;
+        :hover, :focus{
             border: 1px solid  ${theme.primary.main};
         }
     }
 
     select{
         border-radius:5px;
-        box-shadow: 0 2px 5px ${theme.blue}, 0 -2px 5px ${theme.paleBlue};
-        border: 1px solid ${theme.blue};
+        box-shadow: 0 2px 5px ${theme.primary.lighten1}, 0 -2px 5px ${theme.primary.lighten2};
+        border: 1px solid ${theme.primary.lighten1};
         background: white;
         font-size: 14px;
         padding: 2px 4px;
         margin: 3px 5px;
         outline: none;
-        :hover{
+        :hover, :focus{
             border: 1px solid  ${theme.primary.main};
         }}
 

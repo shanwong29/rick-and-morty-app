@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const PageBtn = styled.button`
   color: ${({ isActive, theme }) =>
-    isActive ? theme.primary.main : theme.grey.main};
+    isActive ? theme.accent.main : theme.success.lighten4};
   font-size: 1rem;
   padding: 8px;
+  font-weight: ${({ isActive }) => (isActive ? 700 : 400)};
   visibility: ${({ disabled }) => disabled && "hidden"};
   &:hover,
   &:focus {

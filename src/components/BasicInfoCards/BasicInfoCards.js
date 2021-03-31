@@ -7,7 +7,11 @@ const BasicInfoCards = () => {
 
   //handle Not-found
   if (state.isDataNotFound) {
-    return <h1>No characters fits this filter request. :(</h1>;
+    return (
+      <Styled.ErrMsgWrapper>
+        <h1>No characters fits this filter request. :(</h1>
+      </Styled.ErrMsgWrapper>
+    );
   }
 
   const numOfCardOnEachPage = 10;

@@ -37,15 +37,15 @@ export const SubmitBtn = styled.button`
 
 export const ClearQueryBtn = styled.button`
   background: white;
-  color: ${({ theme }) => theme.secondary.main};
-  border: ${({ theme }) => theme.secondary.main} 1px solid;
+  color: ${({ theme }) => theme.accent.main};
+  border: ${({ theme }) => theme.accent.main} 1px solid;
   border-radius: 20px;
   &:hover {
     color: white;
-    background-color: ${({ theme }) => theme.secondary.main};
+    background-color: ${({ theme }) => theme.accent.main};
   }
   &:focus {
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.beige};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.success.lighten6};
   }
   padding: 5px 10px;
   margin: 3px;

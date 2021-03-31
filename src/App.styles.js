@@ -6,6 +6,6 @@ export const AppWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: ${({ theme }) => theme.primary.lighten3};
+  background: ${({ theme }) => theme.background};
   min-height: 100vh;
 `;

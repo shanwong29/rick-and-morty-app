@@ -1,16 +1,23 @@
 export const theme = {
-  secondary: { main: "#fe615f", dark: "#e63946" },
   primary: {
-    main: "#435cff",
-    lighten1: "#e0ecfa",
-    lighten3: "#f4f9fc",
+    main: "#ab70f0", // purple,
+    lighten1: "#e5d4fa",
+    lighten2: "#eee2fc",
   },
-  grey: {
-    main: "#b7b7b7",
+  secondary: {
+    main: "#a6d9c6", // green
   },
-  blue: "#a8dadc",
-  paleBlue: "#f1faee",
-  beige: "#eee8d5",
+  accent: {
+    main: "#fe615f", // red
+    darken1: "#e63946",
+    dark: "#e42231",
+  },
+  success: {
+    main: "#564f42", // brown
+    lighten4: "#bba998",
+    lighten6: "#eee8d5",
+  },
+  background: "#f8f8f8",
   shadowColor: "rgba(0, 0, 0, 0.5)",
 
   fontSizes: {
