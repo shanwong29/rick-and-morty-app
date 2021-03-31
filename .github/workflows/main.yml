@@ -1,0 +1,68 @@
+name: rick and morty app deploy
+on:
+  push:
+    paths:
+      - ".github/workflows/main.yml"
+      - "src/**"
+      - "public/**"
+    branches:
+      - master
+
+jobs:
+  # stage
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Test code
+        run: |
+          npm ci
+          npm run test:coverage
+      - name: Archive dependencies
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-modules
+          path: node_modules/
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Download node modules
+        uses: actions/download-artifact@master
+        with:
+          name: node-modules
+          path: node_modules/
+      - name: Build static files
+        run: |
+          npm run build
+      - name: Archive build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.6.1
+        with:
+          personal_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: ./build
