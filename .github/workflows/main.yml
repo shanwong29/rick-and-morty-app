@@ -21,13 +21,8 @@ jobs:
         run: |
           npm ci
           npm run test:coverage
-      - name: Archive dependencies
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-modules
-          path: node_modules/
 
-  build:
+  deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -35,32 +30,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Download node modules
-        uses: actions/download-artifact@master
-        with:
-          name: node-modules
-          path: node_modules/
       - name: Build static files
         run: |
+          npm ci
           npm run build
-      - name: Archive build files
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build/
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
