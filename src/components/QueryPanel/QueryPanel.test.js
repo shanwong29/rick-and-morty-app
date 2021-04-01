@@ -9,16 +9,6 @@ import App from "../../App";
 import { allCharData } from "../../__mocks__/data/allCharData";
 import userEvent, { specialChars } from "@testing-library/user-event";
 
-jest.mock("react-transition-group", () => {
-  const FakeTransition = jest.fn(({ children }) => children);
-  const FakeCSSTransition = jest.fn((props) =>
-    props.transitionName ? (
-      <FakeTransition>{props.children}</FakeTransition>
-    ) : null
-  );
-  return { CSSTransitionGroup: FakeCSSTransition, Transition: FakeTransition };
-});
-
 const mockInputEvent = (label, inputValue) => {
   const nameInput = screen.getByLabelText(label, {
     selector: "input",

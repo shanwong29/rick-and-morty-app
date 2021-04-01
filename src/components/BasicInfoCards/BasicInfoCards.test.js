@@ -6,16 +6,6 @@ import { allEpisodeData } from "../../__mocks__/data/allEpisodeData";
 
 import userEvent from "@testing-library/user-event";
 
-jest.mock("react-transition-group", () => {
-  const FakeTransition = jest.fn(({ children }) => children);
-  const FakeCSSTransition = jest.fn((props) =>
-    props.transitionName ? (
-      <FakeTransition>{props.children}</FakeTransition>
-    ) : null
-  );
-  return { CSSTransitionGroup: FakeCSSTransition, Transition: FakeTransition };
-});
-
 beforeEach(async () => {
   render(<App />);
   const firstDisplayCharName = allCharData[0].name;
