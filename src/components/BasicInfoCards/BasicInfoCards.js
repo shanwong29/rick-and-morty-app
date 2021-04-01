@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
+import "./transition.css";
+import { CSSTransitionGroup } from "react-transition-group";
 
 const BasicInfoCards = () => {
   const { state, dispatch } = useContext(Context);
@@ -40,7 +42,7 @@ const BasicInfoCards = () => {
               payload: charPosition,
             });
         }}
-        key={i}
+        key={id}
         isActive={
           i ===
           (typeof state.activeCharPosition === "number" &&
@@ -58,7 +60,21 @@ const BasicInfoCards = () => {
     );
   });
 
-  return <Styled.InfoCardsWrapper>{cardDisplay}</Styled.InfoCardsWrapper>;
+  return (
+    <CSSTransitionGroup
+      transitionName="basicInfoCardTrans"
+      transitionAppearTimeout={500}
+      transitionAppear={true}
+      transitionEnterTimeout={500}
+      transitionLeave={false}
+    >
+      <Styled.InfoCardsWrapper
+        key={`${state.currentApiPage}${state.showSecondPart}`}
+      >
+        {cardDisplay}
+      </Styled.InfoCardsWrapper>
+    </CSSTransitionGroup>
+  );
 };
 
 export default React.memo(BasicInfoCards);

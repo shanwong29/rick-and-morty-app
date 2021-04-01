@@ -8,6 +8,7 @@ import GlobalStyles from "../styleStore/globalStyles";
 import axios from "axios";
 
 const GlobalStateProvider = ({ children }) => {
+  console.log("app");
   const [state, dispatch] = useGlobalState();
   const fetchData = async (collection = "character") => {
     let response;

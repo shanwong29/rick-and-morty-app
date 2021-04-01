@@ -1,0 +1,17 @@
+.basicInfoCardTrans-enter {
+  opacity: 0.01;
+}
+
+.basicInfoCardTrans-enter.basicInfoCardTrans-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.basicInfoCardTrans-appear {
+  opacity: 0.01;
+}
+
+.basicInfoCardTrans-appear.basicInfoCardTrans-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}

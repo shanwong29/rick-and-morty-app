@@ -3,6 +3,16 @@ import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import { allCharData } from "./__mocks__/data/allCharData";
 
+jest.mock("react-transition-group", () => {
+  const FakeTransition = jest.fn(({ children }) => children);
+  const FakeCSSTransition = jest.fn((props) =>
+    props.transitionName ? (
+      <FakeTransition>{props.children}</FakeTransition>
+    ) : null
+  );
+  return { CSSTransitionGroup: FakeCSSTransition, Transition: FakeTransition };
+});
+
 describe("Inital render when api response is successful", () => {
   const lastPage = Math.ceil(allCharData.length / 10);
 
