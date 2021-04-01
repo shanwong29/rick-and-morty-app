@@ -17,7 +17,7 @@ export const QueryForm = styled.form`
   flex-wrap: wrap;
   justify-content: space-around;
   & > div > label {
-    margin-left: 20px;
+    margin-left: 15px;
   }
 
   @media ${({ theme }) => theme.breakpoints.sm} {

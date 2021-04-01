@@ -1,12 +1,10 @@
-import React from "react";
+const FakeSwitchTransition = ({ children }) => children;
 
-const FakeTransition = ({ children }) => children;
-const FakeCSSTransition = (props) =>
-  props.transitionName ? (
-    <FakeTransition>{props.children}</FakeTransition>
-  ) : null;
+const FakeCSSTransition = (props) => {
+  return props.classNames ? props.children : null;
+};
 
 module.exports = {
-  CSSTransitionGroup: FakeCSSTransition,
-  Transition: FakeTransition,
+  SwitchTransition: FakeSwitchTransition,
+  CSSTransition: FakeCSSTransition,
 };

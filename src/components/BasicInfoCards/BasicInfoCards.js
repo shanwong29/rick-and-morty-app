@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Context from "../../store/context";
 import * as Styled from "./BasicInfoCards.styles";
 import "./transition.css";
-import { CSSTransitionGroup } from "react-transition-group";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 const BasicInfoCards = () => {
   const { state, dispatch } = useContext(Context);
@@ -61,19 +61,23 @@ const BasicInfoCards = () => {
   });
 
   return (
-    <CSSTransitionGroup
-      transitionName="basicInfoCardTrans"
-      transitionAppearTimeout={500}
-      transitionAppear={true}
-      transitionEnterTimeout={500}
-      transitionLeave={false}
+    <div
+      style={{
+        minHeight: "38vw",
+      }}
     >
-      <Styled.InfoCardsWrapper
-        key={`${state.currentApiPage}${state.showSecondPart}`}
-      >
-        {cardDisplay}
-      </Styled.InfoCardsWrapper>
-    </CSSTransitionGroup>
+      <SwitchTransition>
+        <CSSTransition
+          key={`${state.currentApiPage}${state.showSecondPart}${state.nameQuery}${state.speciesQuery}${state.statusQuery}`}
+          addEndListener={(node, done) => {
+            node.addEventListener("transitionend", done, false);
+          }}
+          classNames="fade"
+        >
+          <Styled.InfoCardsWrapper>{cardDisplay}</Styled.InfoCardsWrapper>
+        </CSSTransition>
+      </SwitchTransition>
+    </div>
   );
 };
 
