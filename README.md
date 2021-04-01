@@ -21,16 +21,16 @@ You may view it on the deployment page: [Rick and Morty App](https://shanwong29.
 
 2. Clone the repository:
 
-```
-git clone https://github.com/shanwong29/rick-and-morty-app.git
-```
+    ```
+    git clone https://github.com/shanwong29/rick-and-morty-app.git
+    ```
 
 3. Build Docker image and run the Docker container:
 
-```
-cd ./rick-and-morty-app
-docker-compose up --build
-```
+    ```
+    cd ./rick-and-morty-app
+    docker-compose up --build
+    ```
 
 The conatiner can be accessed at [http://localhost:3000](http://localhost:3000).
 
@@ -38,7 +38,7 @@ Every edit in the public or src folder will automatically be reflected in the ap
 
 ## Testing
 
-Tests were built with React Testing Library and Jest. After container is built, test can be run by the following commands:
+Tests were built with React Testing Library and Jest. After the image is built, test can be run by the following commands:
 
 ```
 docker-compose run rick-morty-app sh
