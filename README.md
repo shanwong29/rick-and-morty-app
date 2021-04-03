@@ -56,7 +56,6 @@ Related ymal file can be found in folder `/.github`
 ### Manual
 
 `gh-pages` has been also installed and setup. Manual deployment can be done with the following command:
-(A configured origin remote is needed if it is run in docker container)
 
 ```
 npm run deploy
